@@ -1,0 +1,82 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.pnp.mjs
+.yarn/install-state.gz
+
+# Next.js build output
+/.next
+/out
+
+# Production build
+/build
+/dist
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+/data/orders.json
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Coverage directory used by tools like istanbul
+/coverage
+
+# Temporary files
+.tmp
+.cache
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Debug files
+*.log
+*.pid
+*.seed
+
+# Optional: Keep lock files but exclude them if you want to regenerate
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Codex session files (from your earlier error)
+.codex/
+
+# Local Netlify folder
+.netlify

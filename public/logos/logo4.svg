@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 240" role="img" aria-labelledby="logo4-title logo4-desc">
+  <title id="logo4-title">KarryCards</title>
+  <desc id="logo4-desc">Premium international KarryCards logo with card mark and trust tagline</desc>
+  <defs>
+    <linearGradient id="logo4-card" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#00a676" />
+      <stop offset="0.52" stop-color="#00b4d8" />
+      <stop offset="1" stop-color="#ffb000" />
+    </linearGradient>
+    <linearGradient id="logo4-word" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#073b3a" />
+      <stop offset="0.55" stop-color="#006d77" />
+      <stop offset="1" stop-color="#ff8a00" />
+    </linearGradient>
+    <filter id="logo4-shadow" x="-20%" y="-25%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#073b3a" flood-opacity=".18" />
+    </filter>
+  </defs>
+
+  <g fill="none" filter="url(#logo4-shadow)">
+    <rect x="38" y="48" width="164" height="112" rx="24" fill="#073b3a" opacity=".12" transform="rotate(-9 120 104)" />
+    <rect x="54" y="38" width="164" height="112" rx="24" fill="url(#logo4-card)" transform="rotate(-9 136 94)" />
+    <rect x="82" y="70" width="74" height="14" rx="7" fill="#ffffff" opacity=".95" transform="rotate(-9 119 77)" />
+    <rect x="82" y="101" width="112" height="12" rx="6" fill="#ffffff" opacity=".72" transform="rotate(-9 138 107)" />
+    <circle cx="166" cy="118" r="21" fill="#ffffff" opacity=".88" />
+    <path d="M151 118h30M166 103c7 8 7 22 0 30M166 103c-7 8-7 22 0 30" stroke="#006d77" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M195 55l10 20 22 3-16 15 4 22-20-11-20 11 4-22-16-15 22-3z" fill="#ffb000" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" />
+  </g>
+
+  <g>
+    <text
+      x="242"
+      y="114"
+      fill="url(#logo4-word)"
+      stroke="#ffffff"
+      stroke-linejoin="round"
+      stroke-width="3"
+      font-family="Arial Black, Montserrat, Arial, Helvetica, sans-serif"
+      font-size="86"
+      font-weight="900"
+      paint-order="stroke fill"
+    >KarryCards</text>
+    <text
+      x="249"
+      y="164"
+      fill="#111827"
+      font-family="Arial Black, Arial, Helvetica, sans-serif"
+      font-size="23"
+      font-weight="900"
+      letter-spacing="7"
+    >GIFT CARDS YOU CAN TRUST</text>
+    <path d="M250 184H840" stroke="#00a676" stroke-width="6" stroke-linecap="round" />
+    <path d="M250 197H685" stroke="#ffb000" stroke-width="5" stroke-linecap="round" />
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 240" role="img" aria-labelledby="logo5-title logo5-desc">
+  <title id="logo5-title">KarryCards</title>
+  <desc id="logo5-desc">Footer-friendly KarryCards logo with light text and vibrant card mark</desc>
+  <defs>
+    <linearGradient id="logo5-card" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2dd4bf" />
+      <stop offset="0.5" stop-color="#22c55e" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+    <linearGradient id="logo5-word" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="0.56" stop-color="#d1fae5" />
+      <stop offset="1" stop-color="#fde68a" />
+    </linearGradient>
+  </defs>
+
+  <g fill="none">
+    <rect x="42" y="54" width="156" height="104" rx="24" fill="#000000" opacity=".18" transform="rotate(-8 120 106)" />
+    <rect x="55" y="40" width="156" height="104" rx="24" fill="url(#logo5-card)" transform="rotate(-8 133 92)" />
+    <rect x="82" y="70" width="72" height="13" rx="6.5" fill="#ffffff" opacity=".95" transform="rotate(-8 118 76.5)" />
+    <rect x="82" y="99" width="110" height="11" rx="5.5" fill="#ffffff" opacity=".72" transform="rotate(-8 137 104.5)" />
+    <circle cx="166" cy="118" r="20" fill="#0f172a" opacity=".9" />
+    <path d="M152 118h28M166 104c7 8 7 20 0 28M166 104c-7 8-7 20 0 28" stroke="#fef3c7" stroke-width="3.4" stroke-linecap="round" />
+    <path d="M196 56l9 18 20 3-15 14 4 20-18-10-18 10 4-20-15-14 20-3z" fill="#fef3c7" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" />
+  </g>
+
+  <g>
+    <text
+      x="242"
+      y="113"
+      fill="url(#logo5-word)"
+      font-family="Trebuchet MS, Verdana, Arial, Helvetica, sans-serif"
+      font-size="88"
+      font-weight="900"
+      letter-spacing=".5"
+    >KarryCards</text>
+    <text
+      x="249"
+      y="164"
+      fill="#f8fafc"
+      font-family="Verdana, Arial, Helvetica, sans-serif"
+      font-size="22"
+      font-weight="900"
+      letter-spacing="7"
+    >GIFT CARDS YOU CAN TRUST</text>
+    <path d="M250 184H840" stroke="#2dd4bf" stroke-width="6" stroke-linecap="round" />
+    <path d="M250 197H685" stroke="#fbbf24" stroke-width="5" stroke-linecap="round" />
+  </g>
+</svg>

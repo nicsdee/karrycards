@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 210" role="img" aria-labelledby="logo3-title logo3-desc">
+  <title id="logo3-title">KarryCards</title>
+  <desc id="logo3-desc">Green and orange KarryCards logo with black tagline</desc>
+  <defs>
+    <linearGradient id="karry-logo-fill" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#16a36d" />
+      <stop offset="0.48" stop-color="#52b788" />
+      <stop offset="1" stop-color="#ff7a1a" />
+    </linearGradient>
+  </defs>
+  <g fill="none">
+    <text
+      x="18"
+      y="116"
+      fill="url(#karry-logo-fill)"
+      stroke="#fff8ef"
+      stroke-linejoin="round"
+      stroke-width="4"
+      font-family="Arial Black, Impact, Arial, Helvetica, sans-serif"
+      font-size="112"
+      font-style="italic"
+      font-weight="900"
+      paint-order="stroke fill"
+    >KarryCards</text>
+    <text
+      x="122"
+      y="169"
+      fill="#000000"
+      font-family="Arial Black, Arial, Helvetica, sans-serif"
+      font-size="25"
+      font-weight="900"
+      letter-spacing="8"
+    >GIFT CARDS YOU CAN TRUST</text>
+    <path d="M128 184H830" stroke="#ff7a1a" stroke-linecap="round" stroke-width="5" opacity=".9" />
+    <path d="M128 194H650" stroke="#52b788" stroke-linecap="round" stroke-width="4" opacity=".9" />
+  </g>
+</svg>

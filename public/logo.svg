@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 178" role="img" aria-labelledby="logo-title logo-desc">
+  <title id="logo-title">KarryCards</title>
+  <desc id="logo-desc">KarryCards gift cards you can trust logo</desc>
+  <g fill="none">
+    <text
+      x="18"
+      y="94"
+      fill="#ffffff"
+      stroke="#2f343c"
+      stroke-linejoin="round"
+      stroke-width="5"
+      font-family="Arial Black, Impact, Arial, Helvetica, sans-serif"
+      font-size="92"
+      font-style="italic"
+      font-weight="900"
+      paint-order="stroke fill"
+    >KarryCards</text>
+    <text
+      x="118"
+      y="142"
+      fill="#2f343c"
+      font-family="Arial Black, Arial, Helvetica, sans-serif"
+      font-size="24"
+      font-weight="900"
+      letter-spacing="8"
+    >GIFT CARDS YOU CAN TRUST</text>
+  </g>
+</svg>

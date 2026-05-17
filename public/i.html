@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Elegant Brand | Home</title>
+  <!-- Google Fonts for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* HEADER / NAVIGATION */
+    .header {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid #eef2f6;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    /* logo area: image + text fallback (optional) */
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .logo-area:hover {
+      opacity: 0.85;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+
+    /* in case logo fails to load, a neat fallback with brand initials */
+    .logo-fallback-text {
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* hide fallback when image loads successfully — but we keep it as extra */
+    .logo-text-primary {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -0.3px;
+      color: #0f172a;
+    }
+
+    /* navigation menu */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #334155;
+      transition: color 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .btn-outline {
+      border: 1px solid #cbd5e1;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+
+    /* mobile menu toggle (hidden on desktop) */
+    .mobile-toggle {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #1e293b;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 5rem 0 4rem;
+      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1.2;
+      min-width: 280px;
+    }
+
+    .hero-badge {
+      background: #eef2ff;
+      color: #2563eb;
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      color: #0f172a;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #475569;
+      max-width: 90%;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 500;
+      color: #334155;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .hero-visual {
+      flex: 0.9;
+      background: #eef2ff30;
+      border-radius: 48px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .placeholder-illustration {
+      background: linear-gradient(135deg, #d9e6ff, #ffffff);
+      border-radius: 32px;
+      padding: 2rem 1rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+      font-size: 3rem;
+      color: #3b82f6;
+    }
+
+    /* features section */
+    .features {
+      padding: 5rem 0;
+      background: #ffffff;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: #0f172a;
+    }
+
+    .features-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .feature-card {
+      background: #fefefe;
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      flex: 1 1 260px;
+      border: 1px solid #eef2f6;
+      transition: all 0.25s;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: #cbdffc;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #2563eb;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: #5b6e8c;
+      font-size: 0.9rem;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 3rem 0 2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .footer-logo-img {
+      height: 36px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+    }
+
+    .social-icons a {
+      color: #94a3b8;
+      margin-left: 1.2rem;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: white;
+    }
+
+    /* responsive design */
+    @media (max-width: 880px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
+      .nav-links {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0 0.5rem;
+        align-items: flex-start;
+      }
+      .nav-links.show-mobile {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .hero-content p {
+        max-width: 100%;
+      }
+      .hero-grid {
+        flex-direction: column;
+      }
+      .container {
+        padding: 0 1.5rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .logo-img {
+        height: 40px;
+      }
+      .logo-text-primary {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* error handling for logo — graceful but still shows element */
+    img.logo-img {
+      background: #f9f9fc;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="navbar">
+      <!-- Logo Area: image from logos/lg.png with textual brand alongside -->
+      <a href="#" class="logo-area" aria-label="Homepage">
+        <img src="logos/logo.svg" alt="Company Logo" class="logo-img" onerror="this.onerror=null; this.style.opacity='0'; document.getElementById('fallbackBrand').style.display='flex';"> 
+        <span class="logo-text-primary" id="fallbackBrand" style="display: flex;">Elevate</span>
+      </a>
+      
+      <!-- desktop + mobile toggle -->
+      <button class="mobile-toggle" id="menuToggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Solutions</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#" class="btn-outline">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-rocket" style="font-size: 0.75rem;"></i> New release
+        </div>
+        <h1>Crafting digital<br>experiences that <span style="color:#2563eb;">matter</span></h1>
+        <p>Empower your workflow with intelligent design, fast performance, and meaningful connections. Your brand, elevated.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn-primary">Get started <i class="fas fa-arrow-right"></i></a>
+          <a href="#" class="btn-secondary">Live demo</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="placeholder-illustration">
+          <i class="fas fa-chart-line" style="font-size: 3rem;"></i>
+          <i class="fas fa-mobile-alt" style="margin-left: 1.2rem; font-size: 3rem;"></i>
+          <i class="fas fa-cloud-upload-alt" style="margin-left: 1.2rem; font-size: 3rem;"></i>
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: #3b82f6; font-weight: 500;">Modern · Fast · Seamless</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why choose us</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Lightning fast</h3>
+          <p>Optimized for speed and performance, your pages load instantly across all devices.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-palette"></i></div>
+          <h3>Visual identity</h3>
+          <p>Tailored design that captures your brand voice and elevates user engagement.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Secure & reliable</h3>
+          <p>Enterprise-grade security with best practices, so your data stays protected.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-logo">
+      <!-- same logo in footer for consistency -->
+      <img src="logos/logo.svg" alt="Logo Footer" class="footer-logo-img" onerror="this.style.display='none'; this.nextSibling ? this.nextSibling.style.display='inline-block' : null;">
+      <span style="font-weight: 500; letter-spacing: -0.2px;">Elevate<span style="font-weight: 300;">Studio</span></span>
+    </div>
+    <div class="footer-copy">
+      &copy; 2025 Elevate Brand. All rights reserved.
+    </div>
+    <div class="social-icons">
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- tiny script for mobile menu toggle & graceful logo fallback -->
+<script>
+  (function() {
+    // Mobile menu toggle
+    const toggleBtn = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (toggleBtn && navLinks) {
+      toggleBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show-mobile');
+        // change icon style optional (burger to close)
+        const icon = toggleBtn.querySelector('i');
+        if (icon) {
+          if (navLinks.classList.contains('show-mobile')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        }
+      });
+    }
+    
+    // Additional graceful handling for logo: if main logo fails, we rely on fallback text 'Elevate'
+    // Since we already have an inline fallback using onerror to hide image and show fallbackBrand style.
+    // However, by default fallbackBrand is visible, but we might want to treat it as 'display: flex' initially,
+    // but if image loads, we optionally hide the textual fallback? Actually we want to show both brand text? 
+    // The design includes both image and text side-by-side as part of the logo area. 
+    // Let's refine: the logo-img is displayed along with a textual brand name "Elevate". 
+    // In case logo fails, we should keep textual identity but also indicate subtle fallback; the onerror sets image opacity 0.
+    // But to avoid empty space, we set img to visibility hidden? but better to set width:0?
+    // However current approach: on image error we set this.style.opacity='0' and make #fallbackBrand display flex. 
+    // But #fallbackBrand is the sibling span with text "Elevate" which is already visible by default.
+    // But we would not want double text when image loads? Actually The HTML by default shows both: image + span (Elevate).
+    // That's intended: We want brand identity: logo image + 'Elevate' wordmark.
+    // In case the image fails to load, we reduce image opacity to 0 (so it's invisible) and keep fallback span.
+    // But if image loads fine, it's visible and span remains visible (brand wordmark). That's the intended style!
+    // However in fallback scenario where image fails, we make it invisible, still have text 'Elevate'.
+    // And also in footer we have a fallback logic as well (simple).
+    // Let's improve: make the footer image also have fallback similar behavior.
+    const footerImg = document.querySelector('.footer-logo-img');
+    if (footerImg) {
+      footerImg.addEventListener('error', function(e) {
+        footerImg.style.display = 'none';
+        // ensure sibling span text doesn't double but it's fine
+      });
+    }
+
+    // improve mobile menu close when clicking on a link (optional UX)
+    const allNavLinks = document.querySelectorAll('.nav-links a');
+    if (navLinks) {
+      allNavLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth <= 880) {
+            navLinks.classList.remove('show-mobile');
+            const icon = toggleBtn?.querySelector('i');
+            if (icon && icon.classList.contains('fa-times')) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+          }
+        });
+      });
+    }
+    
+    // Additional guarantee: re-check on window resize, close menu if resizing up
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 880 && navLinks && navLinks.classList.contains('show-mobile')) {
+        navLinks.classList.remove('show-mobile');
+        const icon = toggleBtn?.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      }
+    });
+  })();
+</script>
+</body>
+</html>
