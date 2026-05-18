@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/"
     },
-    sitemap: "https://karrycards.com/sitemap.xml"
+    sitemap: "https://karrycards.vercel.app/sitemap.xml"
   };
 }

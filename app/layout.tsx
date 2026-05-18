@@ -1,16 +1,29 @@
 import type { Metadata } from "next";
+import PromoStrip from "./components/PromoStrip";
+import TawkToChat from "./components/TawkToChat";
 import VisitorTracker from "./components/VisitorTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://karrycards.com"),
+  metadataBase: new URL("https://karrycards.vercel.app"),
   title: {
     default: "KarryCards | Trusted Digital Gift Cards",
     template: "%s | KarryCards"
   },
   description:
-    "Shop trusted digital gift cards for gaming, coffee, streaming, food delivery, retail, beauty, and travel with instant delivery.",
+    "Buy trusted digital gift cards online with secure checkout, instant payment confirmation, email delivery, and order tracking for customers worldwide.",
   keywords: [
+    "buy gift cards online",
+    "digital gift cards online",
+    "discount gift cards",
+    "global gift card store",
+    "USA gift cards online",
+    "crypto gift cards",
+    "gift cards with crypto",
+    "Amazon gift card discount",
+    "Apple gift card discount",
+    "PlayStation gift card discount",
+    "Visa gift card online",
     "digital gift cards",
     "trusted gift cards",
     "gaming gift cards",
@@ -24,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KarryCards | Trusted Digital Gift Cards",
     description:
-      "Shop trusted digital gift cards for gaming, coffee, streaming, food delivery, retail, beauty, and travel.",
+      "Buy trusted digital gift cards online with secure checkout, fast payment confirmation, and email delivery.",
     url: "/",
     siteName: "KarryCards",
     images: [
@@ -43,8 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KarryCards | Trusted Digital Gift Cards",
-    description: "Shop trusted digital gift cards with instant delivery."
+    title: "KarryCards | Discount Digital Gift Cards",
+    description: "Buy trusted digital gift cards online with secure checkout and email delivery."
   }
 };
 
@@ -55,11 +68,36 @@ export default function RootLayout({
 }>) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "Store",
     name: "KarryCards",
-    url: "https://karrycards.com",
-    logo: "https://karrycards.com/logos/logo4.svg",
-    sameAs: []
+    url: "https://karrycards.vercel.app",
+    logo: "https://karrycards.vercel.app/logos/logo4.svg",
+    foundingDate: "2013",
+    description: "Digital gift card store serving online shoppers worldwide since 2013.",
+    areaServed: ["US", "CA", "GB", "EU", "AU", "NG", "KE", "ZA", "AE", "Worldwide"],
+    paymentAccepted: "Cryptocurrency",
+    priceRange: "$$",
+    sameAs: [],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Digital gift cards",
+      itemListElement: [
+        "Gaming gift cards",
+        "Retail gift cards",
+        "Streaming gift cards",
+        "Food delivery gift cards",
+        "Travel gift cards",
+        "Prepaid gift cards"
+      ].map((name) => ({
+        "@type": "OfferCatalog",
+        name
+      }))
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://karrycards.vercel.app/our-digital-gift-cards?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   };
 
   return (
@@ -67,7 +105,9 @@ export default function RootLayout({
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <VisitorTracker />
+        <PromoStrip />
         {children}
+        <TawkToChat />
       </body>
     </html>
   );

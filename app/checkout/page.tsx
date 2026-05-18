@@ -1,35 +1,25 @@
 "use client";
 
-import { Bitcoin, CircleDollarSign, Copy, ExternalLink, LockKeyhole, Minus, Plus, ShieldCheck, ShoppingCart, Trash2 } from "lucide-react";
+import { ExternalLink, LockKeyhole, Minus, Plus, ShieldCheck, ShoppingCart, Trash2, WalletCards } from "lucide-react";
+import Image from "next/image";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Footer from "../components/Footer";
 import Nav from "../components/nav";
 import { GiftCard } from "../data";
 import { fallbackCatalog } from "../lib/catalog";
+import { quoteCart } from "../lib/pricing";
 
 type CartItem = GiftCard & {
   amount: number;
   id: string;
 };
 
-type PaymentMethod = {
-  id: string;
-  coin: string;
-  network: string;
-  label: string;
-  caption: string;
-  preferred?: boolean;
-};
-
 type CryptoPayment = {
-  provider: "CryptoRefills";
-  label: string;
-  coin: string;
-  network: string;
-  walletAddress?: string;
-  coinAmount?: string;
-  paymentUrl?: string;
+  provider: "NOWPayments";
+  checkoutUrl: string;
   amount: number;
+  supplierCost: number;
+  profit: number;
   currency: string;
   instructions: string;
 };
@@ -42,22 +32,27 @@ function money(amount: number) {
   }).format(amount);
 }
 
-const paymentMethods: PaymentMethod[] = [
-  { id: "usdc-solana", coin: "USDC", network: "Solana", label: "USDC", caption: "Solana", preferred: true },
-  { id: "usdt-tron", coin: "USDT", network: "Tron", label: "USDT", caption: "Tron" },
-  { id: "usdt-solana", coin: "USDT", network: "Solana", label: "USDT", caption: "Solana" },
-  { id: "btc-lightning", coin: "BTC", network: "Lightning", label: "BTC", caption: "Lightning" },
-  { id: "usdc-base", coin: "USDC", network: "Base", label: "USDC", caption: "Base" },
-  { id: "usdc-polygon", coin: "USDC", network: "Polygon", label: "USDC", caption: "Polygon" },
-  { id: "eth-mainnet", coin: "ETH", network: "ETH Mainnet", label: "ETH", caption: "Mainnet" },
-  { id: "sol-solana", coin: "SOL", network: "Solana", label: "SOL", caption: "Solana" }
+const cryptoIcons = [
+  { code: "BTC", name: "Bitcoin", icon: "/payment-icons/btc.svg" },
+  { code: "USDT", name: "Tether", icon: "/payment-icons/usdt.svg" },
+  { code: "USDC", name: "USD Coin", icon: "/payment-icons/usdc.svg" },
+  { code: "ETH", name: "Ethereum", icon: "/payment-icons/eth.svg" },
+  { code: "TRX", name: "Tron", icon: "/payment-icons/trx.svg" },
+  { code: "BNB", name: "BNB", icon: "/payment-icons/bnb.svg" },
+  { code: "LTC", name: "Litecoin", icon: "/payment-icons/ltc.svg" },
+  { code: "TON", name: "Toncoin", icon: "/payment-icons/ton.svg" },
+  { code: "DOGE", name: "Dogecoin", icon: "/payment-icons/doge.svg" },
+  { code: "SOL", name: "Solana", icon: "/payment-icons/sol.svg" },
+  { code: "XRP", name: "XRP", icon: "/payment-icons/xrp.svg" },
+  { code: "ADA", name: "Cardano", icon: "/payment-icons/ada.svg" },
+  { code: "POL", name: "Polygon", icon: "/payment-icons/matic.svg" },
+  { code: "BCH", name: "Bitcoin Cash", icon: "/payment-icons/bch.svg" },
+  { code: "AVAX", name: "Avalanche", icon: "/payment-icons/avax.svg" }
 ];
 
 export default function CheckoutPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(paymentMethods[0]);
   const [message, setMessage] = useState("");
-  const [copyMessage, setCopyMessage] = useState("");
   const [cryptoPayment, setCryptoPayment] = useState<CryptoPayment | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cartLoaded, setCartLoaded] = useState(false);
@@ -75,9 +70,8 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     setMessage("");
-    setCopyMessage("");
     setCryptoPayment(null);
-  }, [paymentMethod.id]);
+  }, [cart.length]);
 
   const groupedCart = useMemo(() => {
     const groups = new Map<string, CartItem & { quantity: number }>();
@@ -94,7 +88,9 @@ export default function CheckoutPage() {
   }, [cart]);
 
   const subtotal = useMemo(() => cart.reduce((sum, item) => sum + item.amount, 0), [cart]);
-  const total = useMemo(() => Number(subtotal.toFixed(2)), [subtotal]);
+  const priceQuote = useMemo(() => quoteCart(groupedCart), [groupedCart]);
+  const total = priceQuote.total;
+  const discount = priceQuote.discount;
 
   function removeOne(slug: string, amount: number) {
     setCart((current) => {
@@ -118,25 +114,12 @@ export default function CheckoutPage() {
     setCart((current) => current.filter((item) => item.slug !== slug || item.amount !== amount));
   }
 
-  async function copyWallet() {
-    if (!cryptoPayment?.walletAddress) return;
-    await navigator.clipboard.writeText(cryptoPayment.walletAddress);
-    setCopyMessage("Payment address copied");
-  }
-
   async function submitOrder(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
     setIsSubmitting(true);
-    setCopyMessage("");
-    setMessage(`Creating CryptoRefills ${paymentMethod.label} order...`);
+    setMessage("Creating crypto checkout...");
 
     const payload = {
-      customer: {
-        name: form.get("name"),
-        email: form.get("email"),
-        phone: form.get("phone")
-      },
       items: groupedCart.map((item) => ({
         slug: item.slug,
         amount: item.amount,
@@ -145,32 +128,27 @@ export default function CheckoutPage() {
     };
 
     try {
-      const response = await fetch("/api/payments/crypto/order", {
+      const response = await fetch("/api/payments/nowpayments/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json"
         },
-        body: JSON.stringify({
-          ...payload,
-          payment: {
-            coin: paymentMethod.coin,
-            network: paymentMethod.network
-          }
-        })
+        body: JSON.stringify(payload)
       });
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(data.message || "Crypto order could not be created.");
+        setMessage(data.message || "Crypto checkout could not be created.");
         return;
       }
 
       window.localStorage.setItem("karrycards-last-order", data.order.orderNumber);
       setCryptoPayment(data.payment);
-      setMessage(`Order ${data.order.orderNumber} created. Complete the CryptoRefills payment within the payment window.`);
+      setMessage(`Order ${data.order.orderNumber} created. Redirecting to crypto checkout...`);
+      window.location.href = data.payment.checkoutUrl;
     } catch {
-      setMessage("CryptoRefills is not reachable. Please try again.");
+      setMessage("Crypto checkout is not reachable. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -184,61 +162,33 @@ export default function CheckoutPage() {
           <div className="payment-panel">
             <p className="eyebrow">Secure checkout</p>
             <h1>Complete your order</h1>
-            <p className="checkout-intro">Pay with CryptoRefills-supported crypto. CryptoRefills handles the payment invoice and product delivery.</p>
-
-            <div className="payment-method-grid" role="tablist" aria-label="Payment method">
-              {paymentMethods.map((method) => (
-                <button
-                  className={paymentMethod.id === method.id ? "active" : ""}
-                  key={method.id}
-                  type="button"
-                  onClick={() => setPaymentMethod(method)}
-                >
-                  {method.coin === "BTC" ? <Bitcoin size={27} /> : <CircleDollarSign size={27} />}
-                  <span>
-                    <strong>{method.label}{method.preferred ? " Best" : ""}</strong>
-                    <small>{method.caption}</small>
-                  </span>
-                </button>
-              ))}
-            </div>
+            <p className="checkout-intro"> Pay the discounted price using your preferred coin. The payment page handles coin selection, wallet address, and QR code. Your receipt and gift card code are delivered automatically via email within seconds of blockchain confirmation.</p>
+           
 
             <form className="payment-form" onSubmit={submitOrder}>
-              <div className="form-grid customer-grid">
-                <label>
-                  Full name
-                  <input name="name" required placeholder="Name on order" />
-                </label>
-                <label>
-                  Email
-                  <input name="email" required type="email" placeholder="name@example.com" />
-                </label>
-                <label>
-                  Phone for alerts
-                  <input name="phone" inputMode="tel" placeholder="+1 555 000 0000" />
-                </label>
-              </div>
-
               <div className="crypto-box crypto-payment-box">
-                <strong>{paymentMethod.label} payment on {paymentMethod.network}</strong>
-                <p>Create the order, then pay the exact CryptoRefills invoice amount for {money(total)} in gift cards.</p>
+                <strong><WalletCards size={18} /> Crypto checkout</strong>
+                <p>Your Gift card code arrives instantly via email, within seconds of blockchain confirmation.</p>
+                <div className="checkout-coin-row" aria-label="Popular supported coins">
+                  {cryptoIcons.map((coin) => (
+                    <span className="checkout-coin" key={coin.code} title={coin.name}>
+                      <Image src={coin.icon} alt={coin.name} width={38} height={38} />
+                    </span>
+                  ))}
+                </div>
                 {cryptoPayment ? (
                   <div className="wallet-box live-wallet-box">
-                    {cryptoPayment.coinAmount ? (
-                      <span>{cryptoPayment.coinAmount} {cryptoPayment.coin} on {cryptoPayment.network}</span>
-                    ) : null}
-                    {cryptoPayment.walletAddress ? <span>{cryptoPayment.walletAddress}</span> : null}
-                    {cryptoPayment.walletAddress ? <button type="button" onClick={copyWallet}><Copy size={15} /> Copy</button> : null}
-                    {cryptoPayment.paymentUrl ? <a href={cryptoPayment.paymentUrl} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Open payment</a> : null}
-                    <em>{copyMessage || cryptoPayment.instructions}</em>
+                    <span>{money(cryptoPayment.amount)} crypto checkout</span>
+                    <a href={cryptoPayment.checkoutUrl} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Open payment</a>
+                    <em>{cryptoPayment.instructions}</em>
                   </div>
                 ) : null}
               </div>
 
               <button className="pay-button" disabled={cart.length === 0 || isSubmitting} type="submit">
-                {isSubmitting ? "Preparing payment..." : `Create ${paymentMethod.label} order`}
+                {isSubmitting ? "Preparing payment..." : `Continue to payment - ${money(total)}`}
               </button>
-              <p className="secure-note"><LockKeyhole size={15} /> CryptoRefills handles payment confirmation and gift card delivery.</p>
+              <p className="secure-note"><LockKeyhole size={15} /> Fully automatic email delivery. Fulfillment begins only after blockchain confirmation, then your gitft card code arrives instantly..</p>
               {message ? <p className="checkout-message">{message}</p> : null}
             </form>
           </div>
@@ -273,8 +223,8 @@ export default function CheckoutPage() {
               )}
             </div>
             <div className="summary-totals">
-              <span>Subtotal <strong>{money(subtotal)}</strong></span>
-              <span>CryptoRefills checkout fee <strong>Shown before payment</strong></span>
+              <span>Current price <del>{money(subtotal)}</del></span>
+              <span>Discount <strong>-{money(discount)}</strong></span>
               <span className="grand-total">Total <strong>{money(total)}</strong></span>
             </div>
             <div className="summary-trust">

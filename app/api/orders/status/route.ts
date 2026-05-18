@@ -6,11 +6,10 @@ export const runtime = "nodejs";
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const orderNumber = url.searchParams.get("order_number") || url.searchParams.get("order") || "";
-  const email = url.searchParams.get("email") || "";
   const order = await getOrder(orderNumber);
 
-  if (!order || (email && order.customer.email.toLowerCase() !== email.toLowerCase())) {
-    return NextResponse.json({ message: "Order not found. Check the order number and email." }, { status: 404 });
+  if (!order) {
+    return NextResponse.json({ message: "Order not found. Check the order number." }, { status: 404 });
   }
 
   return NextResponse.json({
@@ -27,8 +26,8 @@ export async function GET(request: Request) {
         brand: delivery.brand,
         product_name: delivery.productName,
         amount: delivery.amount,
-        code: null,
-        pin: null,
+        code: delivery.code || null,
+        pin: delivery.pin || null,
         claim_url: delivery.claimUrl || null,
         instructions: delivery.message || null
       }))

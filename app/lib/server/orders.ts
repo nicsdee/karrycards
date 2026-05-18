@@ -4,6 +4,7 @@ import path from "node:path";
 export type StoredOrderItem = {
   slug: string;
   brand: string;
+  category?: string;
   productName: string;
   amount: number;
   quantity: number;
@@ -15,6 +16,8 @@ export type StoredDelivery = {
   brand: string;
   productName: string;
   amount: number;
+  code?: string;
+  pin?: string;
   claimUrl?: string;
   supplierOrderId?: string;
   status: "pending" | "ready" | "failed";
@@ -44,14 +47,17 @@ export type StoredOrder = {
     statusCode?: number;
     raw?: unknown;
   };
-  cryptoRefills?: {
-    orderId?: string;
-    coin?: string;
-    network?: string;
-    walletAddress?: string;
-    coinAmount?: string;
-    paymentUrl?: string;
+  nowPayments?: {
+    invoiceId?: string;
+    invoiceUrl?: string;
+    paymentId?: string;
+    purchaseId?: string;
+    checkoutUrl?: string;
     status?: string;
+    payCurrency?: string;
+    actuallyPaid?: number;
+    outcomeCurrency?: string;
+    outcomeAmount?: number;
     raw?: unknown;
   };
   deliveries: StoredDelivery[];
@@ -73,6 +79,10 @@ async function readOrders(): Promise<StoredOrder[]> {
 async function writeOrders(orders: StoredOrder[]) {
   await mkdir(path.dirname(ordersFile), { recursive: true });
   await writeFile(ordersFile, JSON.stringify(orders, null, 2));
+}
+
+export async function listOrders() {
+  return readOrders();
 }
 
 export function makeOrderNumber() {

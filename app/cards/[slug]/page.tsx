@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import Nav from "../../components/nav";
 import { Category, GiftCard } from "../../data";
 import { fallbackCatalog, fetchCatalog, fetchGiftCard } from "../../lib/catalog";
+import { discountedAmount, discountPercentForCard } from "../../lib/pricing";
 
 type CartItem = GiftCard & {
   amount: number;
@@ -29,6 +30,8 @@ export default function CardDetailPage() {
   const [card, setCard] = useState<GiftCard>(fallbackCard);
   const category = categories.find((item) => item.slug === card.categorySlug);
   const [selectedAmount, setSelectedAmount] = useState(card.price);
+  const discountPercent = discountPercentForCard(card);
+  const selectedSaleAmount = discountedAmount(selectedAmount, discountPercent);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartLoaded, setCartLoaded] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -111,7 +114,7 @@ export default function CardDetailPage() {
                 <span className="card-type">Gift Card</span>
                 <strong>{card.brand}</strong>
                 <small>{card.productName}</small>
-                <em>{money(selectedAmount)}</em>
+                <em>{money(selectedSaleAmount)}</em>
                 <i />
               </div>
             </div>
@@ -136,9 +139,9 @@ export default function CardDetailPage() {
             </div>
 
             <div className="detail-price-box">
-              <strong>{money(selectedAmount)}</strong>
+              <strong>{money(selectedSaleAmount)}</strong>
               <span>USD</span>
-              <em>Instant email delivery</em>
+              <em><del>{money(selectedAmount)}</del> {discountPercent.toFixed(2)}% off</em>
             </div>
 
             <div className="amount-selector">

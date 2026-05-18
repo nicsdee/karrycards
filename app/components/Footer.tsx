@@ -1,6 +1,6 @@
 "use client";
 
-import { Bitcoin, CircleDollarSign, Headphones, Mail, MapPin, ShieldCheck, Truck, Zap } from "lucide-react";
+import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -40,12 +40,7 @@ export default function Footer() {
           <Link className="retail-brand footer-logo-link" href="/" aria-label="KarryCards home">
             <Image className="footer-logo" src="/logos/logo5.svg" alt="KarryCards" width={520} height={70} />
           </Link>
-          <p className="footer-lead">Trusted digital gift cards with crypto checkout, supplier API fulfillment, and order tracking.</p>
-          <div className="footer-trust-grid" aria-label="Store promises">
-            <span><ShieldCheck size={17} /> Payment verified</span>
-            <span><Zap size={17} /> Fast delivery</span>
-            <span><Truck size={17} /> Supplier backed</span>
-          </div>
+          <p className="footer-lead">Trusted digital gift cards with crypto checkout, fast manual fulfillment, and order tracking.</p>
         </div>
 
         <div className="footer-column">
@@ -59,6 +54,7 @@ export default function Footer() {
 
         <div className="footer-column">
           <h2>Support</h2>
+          <Link href="/about-us">About us</Link>
           <Link href="/checkout">Order checkout</Link>
           <Link href="/order-status">Order status</Link>
           <Link href="/terms">Terms & conditions</Link>
@@ -69,7 +65,7 @@ export default function Footer() {
 
         <div className="footer-column footer-newsletter">
           <h2>Payments & alerts</h2>
-          <p>Customers pay through CryptoRefills-supported crypto rails. After payment confirmation, CryptoRefills handles product delivery.</p>
+          <p>Customers pay through secure crypto checkout. After confirmation, paid orders enter the fulfillment desk for quick code delivery.</p>
           <div className="newsletter-form">
             <input
               type="email"
@@ -88,16 +84,32 @@ export default function Footer() {
               {status === "success" ? "OK: " : "Notice: "}{message}
             </div>
           ) : null}
+        </div>
 
-          <div className="footer-payment-panel">
-            <strong>Accepted payment methods</strong>
-            <div className="payment-icons" aria-label="Accepted payment methods">
-              <span className="payment-card usdt"><CircleDollarSign size={15} />USDC</span>
-              <span className="payment-card usdt"><CircleDollarSign size={15} />USDT</span>
-              <span className="payment-card btc"><Bitcoin size={15} />BTC</span>
-              <span className="payment-card mobile-money">ETH</span>
-              <span className="payment-card mobile-money">SOL</span>
-            </div>
+        <div className="footer-crypto-line">
+          <strong>Accepting all crypto payments</strong>
+          <div className="payment-icons" aria-label="Crypto payment icons">
+            {[
+              ["/payment-icons/btc.svg", "BTC"],
+              ["/payment-icons/usdt.svg", "USDT"],
+              ["/payment-icons/usdc.svg", "USDC"],
+              ["/payment-icons/eth.svg", "ETH"],
+              ["/payment-icons/trx.svg", "TRX"],
+              ["/payment-icons/bnb.svg", "BNB"],
+              ["/payment-icons/ltc.svg", "LTC"],
+              ["/payment-icons/ton.svg", "TON"],
+              ["/payment-icons/doge.svg", "DOGE"],
+              ["/payment-icons/sol.svg", "SOL"],
+              ["/payment-icons/xrp.svg", "XRP"],
+              ["/payment-icons/ada.svg", "ADA"],
+              ["/payment-icons/matic.svg", "POL"],
+              ["/payment-icons/bch.svg", "BCH"],
+              ["/payment-icons/avax.svg", "AVAX"]
+            ].map(([icon, label]) => (
+              <span className="payment-card coin-card" key={label} title={label}>
+                <Image src={icon} alt={label} width={34} height={34} />
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -108,10 +120,6 @@ export default function Footer() {
           <Link href="/terms">Terms</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/refunds">Refunds</Link>
-        </div>
-        <div className="footer-contact-line">
-          <span><MapPin size={15} /> Karry Gift Cards LLC</span>
-          <span><Headphones size={15} /> Support via order status</span>
         </div>
       </div>
     </footer>

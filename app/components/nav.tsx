@@ -74,6 +74,16 @@ export default function Nav({
           <Link className={pathname === "/" ? "active" : ""} href="/" onClick={() => setMenuOpen(false)}>
             Home
           </Link>
+          <Link className={pathname === "/about-us" ? "active" : ""} href="/about-us" onClick={() => setMenuOpen(false)}>
+            About Us
+          </Link>
+          <Link
+            className={pathname === "/our-digital-gift-cards" ? "active" : ""}
+            href="/our-digital-gift-cards"
+            onClick={() => setMenuOpen(false)}
+          >
+            Our Cards
+          </Link>
           {categories.map((category) => (
             <Link
               className={activeSlug === category.slug ? "active" : ""}

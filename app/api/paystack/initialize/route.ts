@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
   const totalUsd = body.items.reduce((sum, item) => sum + Number(item.amount || 0), 0);
   const reference = `KC-${Date.now()}`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://karrycards.vercel.app";
 
   const response = await fetch("https://api.paystack.co/transaction/initialize", {
     method: "POST",

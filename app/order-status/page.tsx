@@ -32,7 +32,6 @@ type StatusResponse = {
 
 export default function OrderStatusPage() {
   const [reference, setReference] = useState("");
-  const [email, setEmail] = useState("");
   const [status, setStatus] = useState<StatusResponse | null>(null);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -50,8 +49,7 @@ export default function OrderStatusPage() {
 
     try {
       const params = new URLSearchParams({
-        order_number: reference,
-        email
+        order_number: reference
       });
       const response = await fetch(`${API_BASE_URL || "/api"}/orders/status?${params.toString()}`, {
         headers: { Accept: "application/json" }
@@ -59,7 +57,7 @@ export default function OrderStatusPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(data.message || "Order not found. Check the order number and email.");
+        setMessage(data.message || "Order not found. Check the order number.");
         return;
       }
 
@@ -76,16 +74,12 @@ export default function OrderStatusPage() {
       <Nav categories={fallbackCatalog.categories} showSearch={false} />
       <main className="legal-page">
         <h1>Order Status</h1>
-        <p>Enter your order number and email to check payment, supplier, and delivery status.</p>
+        <p>Enter your order number to check payment, supplier, and delivery status.</p>
         <label className="status-search">
           Order number
           <input value={reference} onChange={(event) => setReference(event.target.value)} placeholder="KC-20260512-ABC123" />
         </label>
-        <label className="status-search">
-          Email
-          <input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="name@example.com" type="email" />
-        </label>
-        <button className="pay-button" disabled={!reference || !email || isLoading} type="button" onClick={checkStatus}>
+        <button className="pay-button" disabled={!reference || isLoading} type="button" onClick={checkStatus}>
           {isLoading ? "Checking..." : "Check status"}
         </button>
         {message ? <p className="checkout-message">{message}</p> : null}

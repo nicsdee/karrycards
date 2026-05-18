@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Nav from "./components/nav";
 import { GiftCard } from "./data";
 import { fallbackCatalog, fetchCatalog } from "./lib/catalog";
+import { discountedPriceForCard, discountPercentForCard } from "./lib/pricing";
 
 type CartItem = GiftCard & {
   amount: number;
@@ -32,7 +33,8 @@ function ProductCard({
   onAdd: (card: GiftCard) => void;
   onDecrease: (card: GiftCard) => void;
 }) {
-  const discount = card.compareAt ? Math.round(((card.compareAt - card.price) / card.compareAt) * 100) : 0;
+  const salePrice = discountedPriceForCard(card);
+  const discount = discountPercentForCard(card);
 
   return (
     <article className="market-card">
@@ -47,7 +49,7 @@ function ProductCard({
             <span className="card-type">Gift Card</span>
             <strong>{card.brand}</strong>
             <small>{card.productName}</small>
-            <em>{money(card.price)}</em>
+            <em>{money(salePrice)}</em>
             <i />
           </div>
         </div>
@@ -61,15 +63,13 @@ function ProductCard({
           </div>
           <p className="delivery">Instant email delivery</p>
           <div className="price-line">
-            <strong>{money(card.price)}</strong>
+            <strong>{money(salePrice)}</strong>
             <span>USD</span>
           </div>
-          {card.compareAt ? (
-            <div className="discount-line">
-              <del>{money(card.compareAt)}</del>
-              <span>{discount}% OFF</span>
-            </div>
-          ) : null}
+          <div className="discount-line">
+            <del>{money(card.price)}</del>
+            <span>{discount.toFixed(2)}% OFF</span>
+          </div>
         </div>
       </Link>
       {quantity > 0 ? (
@@ -187,6 +187,7 @@ export default function Home() {
             <p>No gimmicks! No guesswork! Just KarryCards.</p>
             <div className="hero-actions">
               <Link className="button green" href="/our-digital-gift-cards">Shop Now</Link>
+              <Link className="button orange" href="/about-us">Read More</Link>
               {/*<Link className="button orange" href="/checkout">Go to cart</Link>*/}
             </div>
           </div>
