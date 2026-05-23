@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { serverDataFile } from "./storage-path";
 
 export type CheckoutActivityItem = {
   slug: string;
@@ -28,7 +29,7 @@ export type CheckoutActivity = {
   updatedAt: string;
 };
 
-const activityFile = path.join(process.cwd(), "data", "checkout-activity.json");
+const activityFile = serverDataFile("checkout-activity.json");
 
 async function readActivity(): Promise<CheckoutActivity[]> {
   try {

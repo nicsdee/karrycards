@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { serverDataFile } from "./storage-path";
 
 export type StoredOrderItem = {
   slug: string;
@@ -66,7 +67,7 @@ export type StoredOrder = {
   updatedAt: string;
 };
 
-const ordersFile = path.join(process.cwd(), "data", "orders.json");
+const ordersFile = serverDataFile("orders.json");
 
 async function readOrders(): Promise<StoredOrder[]> {
   try {

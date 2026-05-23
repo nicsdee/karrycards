@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { formatGiftCardCode } from "./gift-card-formats";
 import { StoredOrder } from "./orders";
+import { serverDataFile } from "./storage-path";
 
 type OutboxMessage = {
   id: string;
@@ -15,7 +16,7 @@ type OutboxMessage = {
   provider?: string;
 };
 
-const outboxFile = path.join(process.cwd(), "data", "email-outbox.json");
+const outboxFile = serverDataFile("email-outbox.json");
 
 async function readOutbox(): Promise<OutboxMessage[]> {
   try {
