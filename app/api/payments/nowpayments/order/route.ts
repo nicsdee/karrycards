@@ -3,10 +3,17 @@ import { giftCards } from "../../../../data";
 import { createNowPaymentsInvoice } from "../../../../lib/server/nowpayments";
 import { createOrder, makeOrderNumber, StoredDelivery, StoredOrderItem } from "../../../../lib/server/orders";
 import { quoteCart } from "../../../../lib/pricing";
+import { upsertCheckoutActivity } from "../../../../lib/server/checkout-activity";
 
 export const runtime = "nodejs";
 
 type NowPaymentsOrderBody = {
+  checkoutActivityId?: string;
+  customer?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+  };
   items?: Array<{
     slug?: string;
     amount?: number;
@@ -20,6 +27,11 @@ export async function POST(request: Request) {
 
     if (!body.items?.length) {
       return NextResponse.json({ message: "Cart items are required." }, { status: 400 });
+    }
+
+    const customerEmail = String(body.customer?.email || "").trim().toLowerCase();
+    if (!customerEmail || !customerEmail.includes("@")) {
+      return NextResponse.json({ message: "Customer email is required for gift card delivery." }, { status: 400 });
     }
 
     const items: StoredOrderItem[] = body.items.map((item) => {
@@ -64,9 +76,11 @@ export async function POST(request: Request) {
 
     const order = await createOrder({
       orderNumber,
+      checkoutActivityId: body.checkoutActivityId,
       customer: {
-        name: "Customer",
-        email: "Provided on payment page"
+        name: String(body.customer?.name || "Customer").trim() || "Customer",
+        email: customerEmail,
+        phone: body.customer?.phone ? String(body.customer.phone).trim() : undefined
       },
       items,
       currency: "USD",
@@ -82,6 +96,17 @@ export async function POST(request: Request) {
         raw: invoice
       },
       deliveries
+    });
+
+    await upsertCheckoutActivity({
+      id: body.checkoutActivityId,
+      orderNumber,
+      customer: order.customer,
+      items,
+      subtotal,
+      total,
+      status: "payment_pending",
+      userAgent: request.headers.get("user-agent") || undefined
     });
 
     return NextResponse.json({

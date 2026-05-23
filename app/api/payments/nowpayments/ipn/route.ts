@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { notifyOwner } from "../../../../lib/server/notifications";
 import { updateOrder } from "../../../../lib/server/orders";
 import { NowPaymentsIpn, verifyNowPaymentsSignature } from "../../../../lib/server/nowpayments";
+import { autoFulfillPaidOrder } from "../../../../lib/server/fulfillment";
+import { sendGiftCardDeliveryEmail } from "../../../../lib/server/email";
+import { updateCheckoutActivityByOrder } from "../../../../lib/server/checkout-activity";
 
 export const runtime = "nodejs";
 
@@ -47,8 +50,22 @@ export async function POST(request: Request) {
   }
 
   if (isPaid) {
-    await notifyOwner(updated, "paid");
+    const fulfilled = await autoFulfillPaidOrder(updated);
+    await updateCheckoutActivityByOrder(orderNumber, (activity) => ({
+      ...activity,
+      status: fulfilled.status === "delivered" ? "delivered" : "paid"
+    }));
+    if (fulfilled.status === "delivered") {
+      await sendGiftCardDeliveryEmail(fulfilled);
+      await notifyOwner(fulfilled, "delivered");
+    } else {
+      await notifyOwner(fulfilled, "paid");
+    }
   } else if (isFailed) {
+    await updateCheckoutActivityByOrder(orderNumber, (activity) => ({
+      ...activity,
+      status: "failed"
+    }));
     await notifyOwner(updated, "failed");
   }
 

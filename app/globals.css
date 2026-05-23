@@ -1867,6 +1867,413 @@ h2 {
   background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0 2px, transparent 2px 5px);
 }
 
+/* Realistic generated gift-card faces */
+.real-card,
+.detail-real-card {
+  isolation: isolate;
+  --card-accent: #ffd36a;
+  --card-contrast: #ffffff;
+  --card-deep: color-mix(in srgb, var(--card-color) 52%, #07172f);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.18), transparent 18%),
+    linear-gradient(125deg, transparent 0 58%, rgba(255, 255, 255, 0.1) 58% 63%, transparent 63%),
+    linear-gradient(135deg, var(--card-color), var(--card-deep));
+}
+
+.real-card::before,
+.detail-real-card::before {
+  content: "";
+  position: absolute;
+  inset: auto auto 0 0;
+  z-index: 0;
+  width: 58%;
+  height: 42%;
+  border-radius: 0 999px 0 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.02));
+  pointer-events: none;
+}
+
+.real-card::after,
+.detail-real-card::after {
+  z-index: 2;
+  background: linear-gradient(135deg, #ffe58f, #d29b25 58%, #fff1b8);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 8px 18px rgba(7, 23, 47, 0.14);
+}
+
+.real-card .brand-mark,
+.detail-real-card .brand-mark {
+  position: absolute;
+  right: clamp(18px, 1.6vw, 28px);
+  top: clamp(26px, 2.3vw, 40px);
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.16);
+  font-size: clamp(4.8rem, 7.6vw, 8rem);
+  font-weight: 950;
+  line-height: 0.76;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.real-card .card-logo,
+.detail-real-card .card-logo {
+  position: absolute;
+  right: clamp(18px, 1.7vw, 30px);
+  top: clamp(20px, 1.9vw, 32px);
+  z-index: 1;
+  display: block;
+  width: clamp(62px, 5.8vw, 96px);
+  height: clamp(62px, 5.8vw, 96px);
+  object-fit: contain;
+  opacity: 0.58;
+  mix-blend-mode: screen;
+  filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 8px 16px rgba(7, 23, 47, 0.12));
+}
+
+.detail-real-card .card-logo {
+  width: clamp(108px, 10vw, 154px);
+  height: clamp(108px, 10vw, 154px);
+}
+
+.real-card .watermark,
+.detail-real-card .watermark {
+  z-index: 5;
+  color: rgba(255, 255, 255, 0.42);
+  text-shadow: 0 1px 1px rgba(7, 23, 47, 0.18);
+}
+
+.real-card em,
+.detail-real-card em {
+  color: var(--card-deep);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 18px rgba(7, 23, 47, 0.12);
+}
+
+.real-card i,
+.detail-real-card i {
+  z-index: 2;
+  opacity: 0.9;
+}
+
+.hero-card-logo,
+.digital-mini-logo {
+  position: absolute;
+  right: 20px;
+  top: 48px;
+  z-index: 1;
+  width: clamp(72px, 9vw, 116px);
+  height: clamp(72px, 9vw, 116px);
+  object-fit: contain;
+  opacity: 0.52;
+  mix-blend-mode: screen;
+  filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 10px 18px rgba(7, 23, 47, 0.12));
+}
+
+.digital-mini-logo {
+  right: 18px;
+  top: 24px;
+  width: 88px;
+  height: 88px;
+}
+
+.real-card-amazon,
+.real-card-amazon-prime {
+  --card-accent: #ff9900;
+  --card-deep: #08090b;
+  background:
+    radial-gradient(circle at 82% 44%, rgba(255, 255, 255, 0.08), transparent 20%),
+    linear-gradient(132deg, #050505 0 68%, #ff9900 68% 73%, #111827 73%),
+    linear-gradient(135deg, #07080a, #111827);
+}
+
+.real-card-amazon .brand-mark,
+.real-card-amazon-prime .brand-mark {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(6rem, 9vw, 9rem);
+}
+
+.real-card-amazon i,
+.real-card-amazon-prime i {
+  right: auto;
+  left: 28px;
+  bottom: 26px;
+  width: 86px;
+  height: 9px;
+  border-radius: 999px;
+  background: #ff9900;
+  transform: rotate(-8deg);
+}
+
+.real-card-amazon .card-logo,
+.real-card-amazon-prime .card-logo {
+  opacity: 0.78;
+}
+
+.real-card-walmart {
+  --card-accent: #ffc220;
+  --card-deep: #004f9e;
+  background:
+    radial-gradient(circle at 76% 32%, #ffc220 0 4.5%, transparent 5.4%),
+    radial-gradient(circle at 86% 32%, #ffc220 0 4.5%, transparent 5.4%),
+    radial-gradient(circle at 81% 23%, #ffc220 0 4.5%, transparent 5.4%),
+    radial-gradient(circle at 81% 42%, #ffc220 0 4.5%, transparent 5.4%),
+    radial-gradient(circle at 72% 24%, #ffc220 0 3.8%, transparent 4.7%),
+    radial-gradient(circle at 90% 41%, #ffc220 0 3.8%, transparent 4.7%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 22%),
+    linear-gradient(135deg, #0071ce, #004f9e);
+}
+
+.real-card-walmart .brand-mark {
+  color: rgba(255, 194, 32, 0.38);
+}
+
+.real-card-walmart .card-logo {
+  opacity: 0.1;
+}
+
+.real-card-netflix {
+  --card-accent: #e50914;
+  --card-deep: #050505;
+  background:
+    linear-gradient(100deg, rgba(229, 9, 20, 0.18), transparent 18% 78%, rgba(229, 9, 20, 0.28)),
+    linear-gradient(135deg, #050505, #250003 48%, #e50914 49% 58%, #070707 59%);
+}
+
+.real-card-netflix .brand-mark {
+  color: rgba(229, 9, 20, 0.78);
+}
+
+.real-card-netflix .card-logo {
+  opacity: 0.62;
+}
+
+.real-card-xbox,
+.real-card-xbox-game-pass {
+  --card-accent: #ffffff;
+  --card-deep: #063f08;
+  background:
+    radial-gradient(circle at 78% 30%, rgba(255, 255, 255, 0.2), transparent 18%),
+    linear-gradient(135deg, #107c10, #063f08);
+}
+
+.real-card-xbox .brand-mark,
+.real-card-xbox-game-pass .brand-mark {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.real-card-apple,
+.real-card-apple-tvplus {
+  --card-accent: #ffffff;
+  --card-deep: #f3f4f6;
+  color: #111827;
+  background:
+    radial-gradient(circle at 24% 58%, #ff5a5f 0 8%, transparent 9%),
+    radial-gradient(circle at 36% 46%, #34c759 0 8%, transparent 9%),
+    radial-gradient(circle at 46% 62%, #007aff 0 8%, transparent 9%),
+    radial-gradient(circle at 56% 48%, #ffcc00 0 8%, transparent 9%),
+    linear-gradient(135deg, #ffffff, #e5e7eb);
+}
+
+.real-card-apple .brand-mark,
+.real-card-apple-tvplus .brand-mark {
+  color: rgba(17, 24, 39, 0.12);
+}
+
+.real-card-apple .watermark,
+.real-card-apple-tvplus .watermark,
+.real-card-apple .card-type,
+.real-card-apple-tvplus .card-type,
+.real-card-apple small,
+.real-card-apple-tvplus small {
+  color: rgba(17, 24, 39, 0.72);
+}
+
+.real-card-starbucks {
+  --card-accent: #ffffff;
+  --card-deep: #004c2f;
+  background:
+    radial-gradient(circle at 24% 48%, rgba(255, 255, 255, 0.17), transparent 19%),
+    linear-gradient(90deg, #006241 0 66%, rgba(255, 255, 255, 0.9) 66% 70%, #00754a 70%);
+}
+
+.real-card-starbucks .brand-mark {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.real-card-starbucks .card-logo,
+.real-card-starbucks.detail-real-card .card-logo {
+  right: auto;
+  left: clamp(18px, 1.7vw, 30px);
+  top: clamp(42px, 3.8vw, 62px);
+  width: clamp(92px, 8vw, 128px);
+  height: clamp(92px, 8vw, 128px);
+  opacity: 0.34;
+}
+
+.real-card-amazon .card-logo,
+.real-card-amazon-prime .card-logo {
+  right: clamp(22px, 2vw, 34px);
+  top: clamp(30px, 3vw, 48px);
+  width: clamp(88px, 8vw, 130px);
+  height: clamp(88px, 8vw, 130px);
+  opacity: 0.24;
+}
+
+.real-card-walmart .card-logo,
+.real-card-xbox .card-logo,
+.real-card-xbox-game-pass .card-logo,
+.real-card-netflix .card-logo,
+.real-card-razer .card-logo,
+.real-card-razer-gold .card-logo,
+.real-card-apple .card-logo,
+.real-card-apple-tvplus .card-logo {
+  opacity: 0.3;
+}
+
+.real-card-apple .card-logo,
+.real-card-apple-tvplus .card-logo {
+  filter: grayscale(1) brightness(0) opacity(0.45);
+  mix-blend-mode: multiply;
+}
+
+.real-card-razer,
+.real-card-razer-gold {
+  --card-accent: #d6a636;
+  --card-deep: #071407;
+  background:
+    radial-gradient(circle at 28% 54%, rgba(214, 166, 54, 0.56), transparent 13%),
+    linear-gradient(135deg, #44d62c 0 18%, #0b0f0c 18% 72%, #44d62c 72%);
+}
+
+.real-card-razer .brand-mark,
+.real-card-razer-gold .brand-mark {
+  color: rgba(68, 214, 44, 0.42);
+}
+
+.real-card-razer .card-logo,
+.real-card-razer-gold .card-logo {
+  opacity: 0.5;
+}
+
+.real-card-playstation {
+  --card-accent: #ffffff;
+  --card-deep: #001b5f;
+  background: linear-gradient(135deg, #003791, #001b5f);
+}
+
+.real-card-target {
+  --card-accent: #ffffff;
+  --card-deep: #7a0000;
+  background:
+    radial-gradient(circle at 78% 30%, #ffffff 0 7%, #cc0000 8% 15%, transparent 16%),
+    linear-gradient(135deg, #cc0000, #7a0000);
+}
+
+.real-card-doorDash,
+.real-card-doordash {
+  --card-deep: #b51f08;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 35%),
+    linear-gradient(135deg, #ff3008, #b51f08);
+}
+
+.real-card-spotify {
+  --card-deep: #0f3d23;
+  background:
+    radial-gradient(circle at 78% 30%, rgba(255, 255, 255, 0.14), transparent 17%),
+    linear-gradient(135deg, #1db954, #0f3d23);
+}
+
+.real-card-disneyplus {
+  --card-deep: #061b61;
+  background:
+    radial-gradient(ellipse at 58% 18%, rgba(255, 255, 255, 0.38), transparent 16%),
+    linear-gradient(135deg, #113ccf, #061b61);
+}
+
+.real-card-hulu {
+  --card-deep: #07351d;
+  background: linear-gradient(135deg, #1ce783, #07351d);
+}
+
+.real-card-nintendo {
+  --card-deep: #9b000c;
+  background:
+    radial-gradient(circle at 78% 30%, rgba(255, 255, 255, 0.2), transparent 17%),
+    linear-gradient(135deg, #e60012, #9b000c);
+}
+
+.real-card-steam {
+  --card-deep: #090b0f;
+  background:
+    radial-gradient(circle at 74% 28%, rgba(255, 255, 255, 0.18), transparent 15%),
+    linear-gradient(135deg, #171a21, #090b0f);
+}
+
+.real-card-roblox {
+  --card-deep: #9a1110;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 36%),
+    linear-gradient(135deg, #e2231a, #9a1110);
+}
+
+.real-card-sephora,
+.real-card-nike,
+.real-card-adidas,
+.real-card-nordstrom,
+.real-card-epic-games {
+  --card-deep: #050505;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 36%),
+    linear-gradient(135deg, #111111, #050505);
+}
+
+.real-card-uber,
+.real-card-uber-eats {
+  --card-deep: #050505;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 36%),
+    linear-gradient(135deg, #000000, #0b0f0c);
+}
+
+.real-card-uber-eats {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 36%),
+    linear-gradient(135deg, #06c167, #071407 58%);
+}
+
+.real-card-visa {
+  --card-deep: #0b1354;
+  background:
+    linear-gradient(135deg, #1a1f71 0 72%, #f7b600 72% 78%, #ffffff 78%);
+}
+
+.real-card-mastercard {
+  --card-deep: #111827;
+  background:
+    radial-gradient(circle at 73% 38%, rgba(247, 158, 27, 0.88) 0 15%, transparent 16%),
+    radial-gradient(circle at 60% 38%, rgba(235, 0, 27, 0.88) 0 15%, transparent 16%),
+    linear-gradient(135deg, #111827, #050505);
+}
+
+.real-card-visa,
+.real-card-mastercard {
+  --card-deep: #111827;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 26%),
+    linear-gradient(135deg, var(--card-color), #111827);
+}
+
+.digital-mini-watermark {
+  position: absolute;
+  right: 18px;
+  top: 54px;
+  color: rgba(255, 255, 255, 0.14);
+  font-size: 1.1rem;
+  font-weight: 950;
+  transform: rotate(-10deg);
+}
+
 /*.market-copy {
   display: grid;
   gap: 11px;
@@ -4732,5 +5139,2539 @@ h2 {
 
   .footer-bottom-links span:first-child {
     width: 100%;
+  }
+}
+
+/* Home page refresh */
+.home-page-v2 {
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #ffffff 34%, #f5faf7 100%);
+}
+
+.home-hero-v2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.88fr);
+  gap: clamp(28px, 5vw, 78px);
+  align-items: center;
+  overflow: hidden;
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 86px) clamp(16px, 5vw, 70px) clamp(28px, 5vw, 62px);
+}
+
+.hero-copy-v2 {
+  min-width: 0;
+}
+
+.home-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: #12613e;
+  font-size: 0.82rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.home-kicker svg {
+  color: var(--orange);
+}
+
+.hero-copy-v2 h1 {
+  max-width: 860px;
+  margin: 0 0 18px;
+  color: #07172f;
+  font-family: "Cabinet Grotesk", Inter, system-ui, sans-serif;
+  font-size: clamp(3rem, 7vw, 6.8rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.93;
+}
+
+.hero-copy-v2 > p:not(.home-kicker) {
+  max-width: 720px;
+  margin: 0 0 22px;
+  color: #40516a;
+  font-size: clamp(1.03rem, 1.35vw, 1.28rem);
+  line-height: 1.7;
+}
+
+.hero-search-panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 12px;
+  width: min(720px, 100%);
+  min-height: 62px;
+  border: 1px solid rgba(31, 138, 91, 0.22);
+  border-radius: 16px;
+  padding: 8px 8px 8px 16px;
+  background: #ffffff;
+  box-shadow: 0 20px 55px rgba(7, 23, 47, 0.09);
+}
+
+.hero-search-panel svg {
+  color: var(--green-dark);
+}
+
+.hero-search-panel input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  font-weight: 850;
+}
+
+.hero-search-panel a {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--green-dark);
+}
+
+.hero-search-panel a svg {
+  color: #ffffff;
+}
+
+.hero-actions-v2,
+.hero-proof-row,
+.section-heading-row,
+.section-heading-row a,
+.home-pagination button {
+  display: flex;
+  align-items: center;
+}
+
+.hero-actions-v2 {
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.hero-actions-v2 .button {
+  gap: 9px;
+  min-height: 50px;
+  border-radius: 12px;
+  padding-inline: 18px;
+}
+
+.primary-home-button {
+  color: #ffffff;
+  background: #143e2f;
+}
+
+.primary-home-button:hover {
+  background: var(--green-dark);
+}
+
+.secondary-home-button {
+  border: 1px solid rgba(31, 138, 91, 0.28);
+  color: #143e2f;
+  background: #ffffff;
+}
+
+.hero-proof-row {
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hero-proof-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  border: 1px solid #dfe8f1;
+  border-radius: 999px;
+  padding: 7px 11px;
+  color: #31445d;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.hero-proof-row svg {
+  color: var(--green-dark);
+}
+
+.hero-showcase-v2 {
+  min-width: 0;
+}
+
+.hero-card-stack-v2 {
+  position: relative;
+  overflow: visible;
+  min-height: clamp(400px, 42vw, 540px);
+}
+
+.hero-card-preview {
+  position: absolute;
+  display: grid;
+  align-content: space-between;
+  width: min(420px, 78vw);
+  min-height: 238px;
+  border-radius: 24px;
+  padding: 24px;
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 44%),
+    linear-gradient(135deg, var(--card-color), color-mix(in srgb, var(--card-color) 62%, #07172f));
+  box-shadow: 0 28px 70px rgba(7, 23, 47, 0.2);
+  animation: hero-card-float 7.5s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.hero-card-watermark {
+  position: absolute;
+  right: 24px;
+  top: 72px;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.16);
+  font-size: 1.8rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  pointer-events: none;
+  transform: rotate(-8deg);
+}
+
+.hero-card-preview:hover {
+  filter: saturate(1.12);
+  transform: translateY(-7px) rotate(var(--preview-rotate, 0deg)) scale(1.02);
+  animation-play-state: paused;
+}
+
+.hero-card-preview::after {
+  content: "";
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 62px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffe08a, #d29b25);
+}
+
+.hero-card-preview span,
+.hero-card-preview small,
+.hero-card-preview em {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-card-preview span {
+  width: max-content;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.hero-card-preview strong {
+  position: relative;
+  z-index: 1;
+  margin-top: 52px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.hero-card-preview small,
+.hero-card-preview em {
+  max-width: 230px;
+  color: rgba(255, 255, 255, 0.88);
+  font-style: normal;
+  font-weight: 850;
+}
+
+.hero-card-preview-1 {
+  top: 0;
+  right: 8%;
+  --preview-rotate: -5deg;
+  --float-delay: -0.5s;
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+
+.hero-card-preview-2 {
+  top: 128px;
+  left: 0;
+  --preview-rotate: 5deg;
+  --float-delay: -2.1s;
+  transform: rotate(5deg);
+  z-index: 3;
+}
+
+.hero-card-preview-3 {
+  right: 0;
+  bottom: 22px;
+  --preview-rotate: -1deg;
+  --float-delay: -3.8s;
+  transform: rotate(-1deg);
+  z-index: 4;
+}
+
+.hero-card-preview-4 {
+  left: 10%;
+  bottom: 0;
+  --preview-rotate: 7deg;
+  --float-delay: -5.4s;
+  transform: rotate(7deg);
+  z-index: 2;
+}
+
+@keyframes hero-card-float {
+  0%, 100% {
+    translate: 0 0;
+  }
+  35% {
+    translate: 10px -12px;
+  }
+  70% {
+    translate: -8px 8px;
+  }
+}
+
+.hero-trust-panel {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(31, 138, 91, 0.16);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 45px rgba(7, 23, 47, 0.08);
+}
+
+.hero-trust-panel strong {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.hero-trust-panel div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-trust-panel span {
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: #31506a;
+  background: #eef7f2;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.home-trust-band,
+.home-section-shell,
+.home-catalog-v2 {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+}
+
+.home-trust-band {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0 clamp(16px, 5vw, 70px) clamp(26px, 5vw, 56px);
+}
+
+.home-trust-band article {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 13px;
+  min-width: 0;
+  border: 1px solid #dde8f3;
+  border-radius: 16px;
+  padding: 16px;
+  background: #ffffff;
+  box-shadow: 0 16px 44px rgba(7, 23, 47, 0.06);
+}
+
+.home-trust-band svg {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  padding: 9px;
+  color: #ffffff;
+  background: var(--green-dark);
+}
+
+.home-trust-band h2,
+.home-trust-band p {
+  margin: 0;
+}
+
+.home-trust-band h2 {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.home-trust-band p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.home-section-shell {
+  padding: clamp(28px, 5vw, 64px) clamp(16px, 5vw, 70px);
+}
+
+.section-heading-row {
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.section-heading-row h2 {
+  max-width: 760px;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.75rem, 3.2vw, 3.25rem);
+  line-height: 1.04;
+}
+
+.section-heading-row a {
+  flex: 0 0 auto;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--green-dark);
+  background: #eaf8ef;
+  font-weight: 950;
+}
+
+.popular-strip {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.popular-mini-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 8px;
+  align-content: end;
+  min-height: 126px;
+  border: 1px solid color-mix(in srgb, var(--card-color) 22%, #dfe8f1);
+  border-radius: 14px;
+  padding: 13px;
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 42%),
+    linear-gradient(135deg, var(--card-color), color-mix(in srgb, var(--card-color) 64%, #07172f));
+  box-shadow: 0 12px 32px rgba(7, 23, 47, 0.05);
+}
+
+.popular-mini-card::before {
+  content: "";
+  position: absolute;
+  inset: auto auto 0 0;
+  width: 54%;
+  height: 45%;
+  border-radius: 0 999px 0 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.popular-mini-card span {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 42px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffe08a, #d29b25);
+}
+
+.popular-mini-card em {
+  position: absolute;
+  right: 11px;
+  top: 54%;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 950;
+  transform: rotate(-9deg);
+}
+
+.popular-mini-logo {
+  position: absolute;
+  right: 14px;
+  top: 18px;
+  z-index: 1;
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  opacity: 0.24;
+  mix-blend-mode: screen;
+  filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 8px 16px rgba(7, 23, 47, 0.12));
+}
+
+.popular-mini-card strong,
+.popular-mini-card small {
+  position: relative;
+  z-index: 1;
+  overflow-wrap: anywhere;
+}
+
+.popular-mini-card strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.popular-mini-card small {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 850;
+}
+
+.category-home-section {
+  padding-top: 22px;
+}
+
+.home-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.home-category-grid a {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 174px;
+  border: 1px solid color-mix(in srgb, var(--category-color) 20%, #dfe8f1);
+  border-radius: 16px;
+  padding: 17px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--category-color) 10%, #ffffff), #ffffff 64%);
+  box-shadow: 0 15px 38px rgba(7, 23, 47, 0.05);
+}
+
+.home-category-grid span {
+  color: color-mix(in srgb, var(--category-color) 78%, #07172f);
+  font-size: 1.22rem;
+  font-weight: 950;
+}
+
+.home-category-grid strong {
+  width: max-content;
+  border-radius: 999px;
+  padding: 6px 9px;
+  color: #ffffff;
+  background: color-mix(in srgb, var(--category-color) 86%, #07172f);
+  font-size: 0.8rem;
+}
+
+.home-category-grid small {
+  color: #52647b;
+  font-size: 0.94rem;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.home-catalog-v2 {
+  padding-top: 30px;
+}
+
+.home-catalog-toolbar {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.home-catalog-toolbar h2 {
+  margin: 0 0 6px;
+  font-size: clamp(1.65rem, 3vw, 2.65rem);
+}
+
+.home-catalog-toolbar span {
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.home-filters-v2 {
+  top: 142px;
+}
+
+.home-product-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-product-card {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.home-product-card h3,
+.home-product-card p,
+.home-product-card span,
+.home-category-grid a,
+.home-trust-band article {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.home-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(7, 23, 47, 0.1);
+}
+
+.home-product-card .rating {
+  gap: 5px;
+  color: #f59e0b;
+}
+
+.home-product-card .rating small {
+  color: var(--muted);
+}
+
+.home-pagination {
+  justify-content: center;
+  gap: 12px;
+}
+
+.home-pagination button {
+  gap: 6px;
+}
+
+@media (max-width: 1180px) {
+  .home-hero-v2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-showcase-v2 {
+    width: min(760px, 100%);
+    margin: 0 auto;
+  }
+
+  .popular-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .home-product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .home-trust-band {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .home-hero-v2 {
+    grid-template-columns: minmax(0, 1fr) minmax(96px, 29vw);
+    gap: 8px;
+    align-items: start;
+    padding: 18px 14px 20px;
+  }
+
+  .hero-copy-v2 {
+    display: contents;
+  }
+
+  .hero-copy-v2 .home-kicker,
+  .hero-copy-v2 h1,
+  .hero-copy-v2 > p:not(.home-kicker),
+  .hero-search-panel {
+    grid-column: 1;
+  }
+
+  .hero-showcase-v2 {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+  }
+
+  .home-kicker {
+    gap: 5px;
+    margin-bottom: 8px;
+    font-size: 0.66rem;
+    line-height: 1.2;
+  }
+
+  .hero-copy-v2 h1 {
+    margin-bottom: 10px;
+    font-size: clamp(1.58rem, 7.25vw, 2.24rem);
+    line-height: 0.96;
+  }
+
+  .hero-copy-v2 > p:not(.home-kicker) {
+    margin-bottom: 12px;
+    font-size: clamp(0.78rem, 3.5vw, 0.95rem);
+    line-height: 1.48;
+  }
+
+  .hero-search-panel {
+    grid-template-columns: auto minmax(0, 1fr) 38px;
+    min-height: 46px;
+    border-radius: 12px;
+    padding: 6px 6px 6px 10px;
+  }
+
+  .hero-search-panel input {
+    font-size: 0.78rem;
+  }
+
+  .hero-search-panel a {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero-actions-v2,
+  .hero-proof-row {
+    grid-column: 1 / -1;
+  }
+
+  .hero-actions-v2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .hero-actions-v2 .button {
+    width: auto;
+    min-width: 0;
+    min-height: 42px;
+    border-radius: 10px;
+    padding-inline: 8px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .hero-proof-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 12px;
+  }
+
+  .hero-proof-row span {
+    justify-content: center;
+    min-width: 0;
+    min-height: 31px;
+    gap: 4px;
+    padding: 6px 4px;
+    font-size: clamp(0.52rem, 2.2vw, 0.63rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .hero-proof-row span svg {
+    flex: 0 0 auto;
+    width: 12px;
+    height: 12px;
+  }
+
+  .hero-card-stack-v2 {
+    min-height: 270px;
+    overflow: visible;
+  }
+
+  .hero-card-preview {
+    width: clamp(92px, 27vw, 112px);
+    min-height: clamp(68px, 19vw, 82px);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 14px 30px rgba(7, 23, 47, 0.18);
+  }
+
+  .hero-card-preview::after {
+    right: 8px;
+    bottom: 8px;
+    width: 24px;
+    height: 16px;
+    border-radius: 6px;
+  }
+
+  .hero-card-preview span {
+    padding: 3px 5px;
+    font-size: 0.45rem;
+  }
+
+  .hero-card-watermark {
+    right: 8px;
+    top: 30px;
+    font-size: 0.68rem;
+  }
+
+  .hero-card-logo {
+    right: 8px;
+    top: 24px;
+    width: 42px;
+    height: 42px;
+    opacity: 0.24;
+  }
+
+  .hero-card-preview strong {
+    margin-top: 11px;
+    font-size: clamp(0.75rem, 3.55vw, 0.92rem);
+  }
+
+  .hero-card-preview small,
+  .hero-card-preview em {
+    max-width: 64px;
+    font-size: 0.42rem;
+    line-height: 1.18;
+  }
+
+  .hero-card-preview-1 {
+    top: 4px;
+    right: 0;
+    left: auto;
+  }
+
+  .hero-card-preview-2 {
+    top: 64px;
+    right: 6px;
+    left: auto;
+  }
+
+  .hero-card-preview-3 {
+    top: 126px;
+    right: 0;
+    left: auto;
+  }
+
+  .hero-card-preview-4 {
+    top: 188px;
+    right: 5px;
+    bottom: auto;
+    left: auto;
+  }
+
+  .hero-trust-panel {
+    display: none;
+  }
+
+  .home-trust-band,
+  .home-section-shell {
+    padding-inline: 12px;
+  }
+
+  .home-trust-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding-bottom: 18px;
+  }
+
+  .home-trust-band article {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    border-radius: 12px;
+    padding: 11px;
+  }
+
+  .home-trust-band svg {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    padding: 7px;
+  }
+
+  .home-trust-band h2 {
+    font-size: 0.82rem;
+    line-height: 1.18;
+  }
+
+  .home-trust-band p {
+    font-size: 0.72rem;
+    line-height: 1.32;
+  }
+
+  .home-section-shell {
+    padding-block: 24px;
+  }
+
+  .section-heading-row {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .section-heading-row h2 {
+    font-size: clamp(1.28rem, 6.2vw, 1.75rem);
+  }
+
+  .popular-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .popular-mini-card {
+    min-height: 104px;
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .popular-mini-card span {
+    width: 34px;
+    height: 23px;
+  }
+
+  .popular-mini-card em {
+    top: 50%;
+    right: 8px;
+    font-size: 0.78rem;
+  }
+
+  .popular-mini-logo {
+    right: 10px;
+    top: 13px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .popular-mini-card strong {
+    font-size: 0.86rem;
+    line-height: 1.12;
+  }
+
+  .popular-mini-card small {
+    font-size: 0.7rem;
+  }
+
+  .home-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .home-category-grid a {
+    min-height: 128px;
+    border-radius: 12px;
+    padding: 11px;
+  }
+
+  .home-category-grid span {
+    font-size: 0.95rem;
+    line-height: 1.1;
+  }
+
+  .home-category-grid strong {
+    padding: 5px 7px;
+    font-size: 0.64rem;
+  }
+
+  .home-category-grid small {
+    font-size: 0.72rem;
+    line-height: 1.28;
+  }
+
+  .product-grid.marketplace.home-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .home-product-card {
+    border-radius: 12px;
+  }
+
+  .home-product-card .visual-wrap {
+    min-height: 132px;
+    padding: 10px 8px;
+  }
+
+  .home-product-card .badge {
+    left: 8px;
+    top: 8px;
+    padding: 4px 7px;
+    font-size: 0.62rem;
+  }
+
+  .home-product-card .real-card {
+    min-height: 112px;
+    border-radius: 13px;
+    padding: 14px 12px;
+  }
+
+  .home-product-card .real-card .watermark {
+    top: 48px;
+    right: 10px;
+    font-size: 0.7rem;
+  }
+
+  .home-product-card .real-card .card-logo,
+  .real-card .card-logo {
+    right: 10px;
+    top: 18px;
+    width: 48px;
+    height: 48px;
+    opacity: 0.24;
+  }
+
+  .home-product-card .real-card strong {
+    margin-top: 28px;
+    font-size: 1rem;
+  }
+
+  .home-product-card .real-card small,
+  .home-product-card .real-card em {
+    font-size: 0.64rem;
+  }
+
+  .home-product-card .real-card i {
+    right: 12px;
+    bottom: 12px;
+    width: 28px;
+    height: 18px;
+    border-radius: 6px;
+  }
+
+  .home-product-card .market-copy {
+    padding: 10px;
+  }
+
+  .home-product-card .vendor {
+    font-size: 0.58rem;
+  }
+
+  .home-product-card .market-copy h3 {
+    font-size: 0.85rem;
+    line-height: 1.15;
+  }
+
+  .home-product-card .rating,
+  .home-product-card .delivery,
+  .home-product-card .discount-line {
+    font-size: 0.68rem;
+  }
+
+  .home-product-card .rating small {
+    display: none;
+  }
+
+  .home-product-card .price-line strong {
+    font-size: 1rem;
+  }
+
+  .home-product-card .round-add,
+  .home-product-card .quantity-stepper {
+    margin: 0 10px 10px;
+    width: calc(100% - 20px);
+    min-height: 38px;
+    border-radius: 10px;
+    font-size: 0.76rem;
+  }
+}
+
+/* Admin and checkout operations polish */
+.checkout-customer-box {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(31, 138, 91, 0.18);
+  border-radius: 14px;
+  padding: 15px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(7, 23, 47, 0.05);
+}
+
+.checkout-customer-box strong {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.checkout-customer-box label {
+  display: grid;
+  gap: 6px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.checkout-customer-box input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: #ffffff;
+  font: inherit;
+}
+
+.ops-shell {
+  width: min(1320px, 100%);
+}
+
+.ops-metrics {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.ops-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.8fr) minmax(280px, 0.9fr);
+}
+
+.ops-checkout-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  background: #ffffff;
+  box-shadow: 0 16px 42px rgba(7, 23, 47, 0.07);
+}
+
+.ops-checkout-row strong,
+.ops-checkout-row small,
+.ops-checkout-row span {
+  display: block;
+}
+
+.ops-checkout-row strong {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.ops-checkout-row small,
+.ops-checkout-row span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.ops-checkout-row em {
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--green-dark);
+  background: #eaf8ef;
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.ops-checkout-row b {
+  grid-column: 1 / -1;
+  color: var(--ink);
+}
+
+.ops-recent code {
+  display: block;
+  max-width: 100%;
+  margin-top: 7px;
+  border-radius: 8px;
+  padding: 7px 8px;
+  color: #143e2f;
+  background: #eaf8ef;
+  font-size: 0.72rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 980px) {
+  .ops-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ops-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Final card-face lock: this must stay after responsive/detail rules. */
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card)[class*="real-card-"] {
+  --card-deep: color-mix(in srgb, var(--card-color) 55%, #07172f);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.16), transparent 18%),
+    linear-gradient(125deg, transparent 0 58%, rgba(255, 255, 255, 0.1) 58% 63%, transparent 63%),
+    linear-gradient(135deg, var(--card-color), var(--card-deep));
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-amazon,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-amazon-prime {
+  --card-deep: #050505;
+  background:
+    radial-gradient(circle at 82% 48%, rgba(255, 255, 255, 0.09), transparent 17%),
+    linear-gradient(132deg, #050505 0 67%, #ff9900 67% 72%, #131820 72%),
+    linear-gradient(135deg, #050505, #131820);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart {
+  --card-deep: #004f9e;
+  background:
+    radial-gradient(circle at 78% 31%, #ffc220 0 4.5%, transparent 5.35%),
+    radial-gradient(circle at 88% 31%, #ffc220 0 4.5%, transparent 5.35%),
+    radial-gradient(circle at 83% 22%, #ffc220 0 4.5%, transparent 5.35%),
+    radial-gradient(circle at 83% 41%, #ffc220 0 4.5%, transparent 5.35%),
+    radial-gradient(circle at 74% 23%, #ffc220 0 3.6%, transparent 4.5%),
+    radial-gradient(circle at 91% 40%, #ffc220 0 3.6%, transparent 4.5%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent 22%),
+    linear-gradient(135deg, #0071ce, #004f9e);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-starbucks {
+  --card-deep: #004c2f;
+  background:
+    radial-gradient(circle at 26% 49%, rgba(255, 255, 255, 0.18), transparent 20%),
+    linear-gradient(90deg, #006241 0 64%, rgba(255, 255, 255, 0.92) 64% 68%, #00754a 68%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-netflix {
+  --card-deep: #050505;
+  background:
+    linear-gradient(100deg, rgba(229, 9, 20, 0.16), transparent 18% 77%, rgba(229, 9, 20, 0.32)),
+    linear-gradient(135deg, #050505, #240003 49%, #e50914 50% 59%, #070707 60%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-xbox,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-xbox-game-pass {
+  --card-deep: #063f08;
+  background:
+    radial-gradient(circle at 78% 31%, rgba(255, 255, 255, 0.23), transparent 18%),
+    linear-gradient(135deg, #107c10, #063f08);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-razer,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-razer-gold {
+  --card-deep: #071407;
+  background:
+    radial-gradient(circle at 28% 54%, rgba(214, 166, 54, 0.56), transparent 13%),
+    linear-gradient(135deg, #44d62c 0 18%, #0b0f0c 18% 72%, #44d62c 72%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-apple,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-apple-tvplus {
+  --card-deep: #e5e7eb;
+  color: #111827;
+  background:
+    radial-gradient(circle at 24% 58%, #ff5a5f 0 8%, transparent 9%),
+    radial-gradient(circle at 36% 46%, #34c759 0 8%, transparent 9%),
+    radial-gradient(circle at 46% 62%, #007aff 0 8%, transparent 9%),
+    radial-gradient(circle at 56% 48%, #ffcc00 0 8%, transparent 9%),
+    linear-gradient(135deg, #ffffff, #e5e7eb);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-playstation {
+  --card-deep: #001b5f;
+  background: linear-gradient(135deg, #003791, #001b5f);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-target {
+  --card-deep: #7a0000;
+  background:
+    radial-gradient(circle at 78% 30%, #ffffff 0 7%, #cc0000 8% 15%, transparent 16%),
+    linear-gradient(135deg, #cc0000, #7a0000);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-spotify {
+  --card-deep: #0f3d23;
+  background: linear-gradient(135deg, #1db954, #0f3d23);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-doordash,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-roblox,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-nintendo {
+  --card-deep: #940900;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 35%),
+    linear-gradient(135deg, var(--card-color), #940900);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-steam,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-sephora,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-nike,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-adidas,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-nordstrom,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-epic-games {
+  --card-deep: #050505;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 36%),
+    linear-gradient(135deg, #111111, #050505);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-uber {
+  --card-deep: #050505;
+  background: linear-gradient(135deg, #000000, #0b0f0c);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-uber-eats,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-hulu {
+  --card-deep: #071407;
+  background: linear-gradient(135deg, var(--card-color), #071407 58%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-visa {
+  --card-deep: #0b1354;
+  background: linear-gradient(135deg, #1a1f71 0 72%, #f7b600 72% 78%, #ffffff 78%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-mastercard {
+  --card-deep: #111827;
+  background:
+    radial-gradient(circle at 73% 38%, rgba(247, 158, 27, 0.88) 0 15%, transparent 16%),
+    radial-gradient(circle at 60% 38%, rgba(235, 0, 27, 0.88) 0 15%, transparent 16%),
+    linear-gradient(135deg, #111827, #050505);
+}
+
+.real-card .card-logo,
+.detail-real-card .card-logo,
+.home-product-card .real-card .card-logo,
+.hero-card-preview .hero-card-logo,
+.popular-mini-card .popular-mini-logo,
+.digital-mini-logo {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 10px 18px rgba(7, 23, 47, 0.14));
+}
+
+.real-card .watermark,
+.detail-real-card .watermark,
+.hero-card-watermark,
+.popular-mini-card em,
+.digital-mini-watermark {
+  color: rgba(255, 255, 255, 0.42);
+  text-shadow: 0 1px 1px rgba(7, 23, 47, 0.18);
+}
+
+.real-card-apple .card-logo,
+.real-card-apple-tvplus .card-logo,
+.detail-real-card.real-card-apple .card-logo,
+.detail-real-card.real-card-apple-tvplus .card-logo,
+.hero-card-preview.real-card-apple .hero-card-logo,
+.hero-card-preview.real-card-apple-tvplus .hero-card-logo,
+.popular-mini-card.real-card-apple .popular-mini-logo,
+.popular-mini-card.real-card-apple-tvplus .popular-mini-logo {
+  opacity: 0.5;
+  filter: grayscale(1) brightness(0) opacity(0.5);
+  mix-blend-mode: multiply;
+}
+
+/* Printed-card finish: do not show pasted favicon/logo tiles on gift-card faces. */
+.real-card .card-logo,
+.detail-real-card .card-logo,
+.home-product-card .real-card .card-logo,
+.hero-card-preview .hero-card-logo,
+.popular-mini-card .popular-mini-logo,
+.digital-mini-logo {
+  display: none !important;
+}
+
+.real-card::after,
+.detail-real-card::after,
+.hero-card-preview::after,
+.popular-mini-card span {
+  display: none;
+}
+
+.real-card .brand-mark,
+.detail-real-card .brand-mark {
+  right: clamp(16px, 2vw, 34px);
+  top: 50%;
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.16);
+  font-size: clamp(5.8rem, 10vw, 10rem);
+  line-height: 0.72;
+  transform: translateY(-50%);
+}
+
+.real-card strong,
+.detail-real-card strong {
+  position: relative;
+  z-index: 2;
+  max-width: 72%;
+}
+
+.real-card .card-type,
+.detail-real-card .card-type,
+.real-card small,
+.detail-real-card small,
+.real-card em,
+.detail-real-card em {
+  position: relative;
+  z-index: 2;
+}
+
+.real-card-amazon .brand-mark,
+.real-card-amazon-prime .brand-mark,
+.detail-real-card.real-card-amazon .brand-mark,
+.detail-real-card.real-card-amazon-prime .brand-mark {
+  right: clamp(18px, 2.4vw, 42px);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(7rem, 12vw, 12rem);
+  text-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.real-card-amazon strong,
+.real-card-amazon-prime strong,
+.detail-real-card.real-card-amazon strong,
+.detail-real-card.real-card-amazon-prime strong {
+  text-transform: lowercase;
+  letter-spacing: 0;
+}
+
+.real-card-amazon .card-type,
+.real-card-amazon-prime .card-type,
+.detail-real-card.real-card-amazon .card-type,
+.detail-real-card.real-card-amazon-prime .card-type {
+  color: #ff9900;
+}
+
+.real-card-walmart .brand-mark,
+.detail-real-card.real-card-walmart .brand-mark {
+  color: rgba(255, 194, 32, 0.35);
+  font-size: clamp(5rem, 9vw, 9rem);
+}
+
+.real-card-netflix .brand-mark,
+.detail-real-card.real-card-netflix .brand-mark {
+  color: rgba(229, 9, 20, 0.88);
+}
+
+.real-card-starbucks .brand-mark,
+.detail-real-card.real-card-starbucks .brand-mark {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+/* Walmart: match the blue gift-card face with the oversized yellow spark artwork. */
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart {
+  --card-deep: #1d4f97;
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 78% 45%, rgba(255, 255, 255, 0.26), transparent 32%),
+    linear-gradient(105deg, #214f98 0 46%, #2f68a8 70%, #7db7df 100%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart::before {
+  content: "";
+  position: absolute;
+  left: -20%;
+  top: -35%;
+  z-index: 0;
+  width: 72%;
+  aspect-ratio: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320'%3E%3Cg fill='%23fdbb30'%3E%3Crect x='143' y='-28' width='34' height='142' rx='17' transform='rotate(0 160 160)'/%3E%3Crect x='143' y='-28' width='34' height='142' rx='17' transform='rotate(60 160 160)'/%3E%3Crect x='143' y='-28' width='34' height='142' rx='17' transform='rotate(120 160 160)'/%3E%3Crect x='143' y='-28' width='34' height='142' rx='17' transform='rotate(180 160 160)'/%3E%3Crect x='143' y='-28' width='34' height='142' rx='17' transform='rotate(240 160 160)'/%3E%3Crect x='143' y='-28' width='34' height='142' rx='17' transform='rotate(300 160 160)'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(7px 8px 8px rgba(7, 23, 47, 0.22));
+  pointer-events: none;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .brand-mark {
+  display: none;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart strong {
+  position: absolute;
+  right: 12%;
+  bottom: 14%;
+  z-index: 2;
+  max-width: 48%;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.75rem, 2.25vw, 2.65rem);
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: right;
+  text-shadow: 0 2px 4px rgba(7, 23, 47, 0.24);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart strong::after {
+  content: "";
+  display: inline-block;
+  width: 0.86em;
+  height: 0.86em;
+  margin-left: 0.14em;
+  vertical-align: -0.08em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='%23fdbb30'%3E%3Crect x='53' y='0' width='14' height='42' rx='7'/%3E%3Crect x='53' y='78' width='14' height='42' rx='7'/%3E%3Crect x='53' y='0' width='14' height='42' rx='7' transform='rotate(60 60 60)'/%3E%3Crect x='53' y='0' width='14' height='42' rx='7' transform='rotate(120 60 60)'/%3E%3Crect x='53' y='0' width='14' height='42' rx='7' transform='rotate(240 60 60)'/%3E%3Crect x='53' y='0' width='14' height='42' rx='7' transform='rotate(300 60 60)'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .card-type {
+  position: absolute;
+  right: 13.5%;
+  bottom: 8%;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.52rem, 0.78vw, 0.78rem);
+  font-weight: 750;
+  line-height: 1;
+  text-align: right;
+  text-transform: none;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .card-type {
+  font-size: 0;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .card-type::after {
+  content: "Select Gift Card";
+  font-size: clamp(0.52rem, 0.78vw, 0.78rem);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart small {
+  position: absolute;
+  right: 8%;
+  top: 42%;
+  z-index: 2;
+  max-width: 34%;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(0.58rem, 0.82vw, 0.82rem);
+  font-weight: 650;
+  line-height: 1.18;
+  text-align: right;
+  opacity: 1;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart small {
+  font-size: 0;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart small::after {
+  content: "This card may not be used to purchase alcohol, tobacco, firearms, or lottery. In-Store Redemption Only";
+  font-size: clamp(0.58rem, 0.82vw, 0.82rem);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart em {
+  position: absolute;
+  right: 7%;
+  top: 8%;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  background: transparent;
+  box-shadow: none;
+  font-size: clamp(2.05rem, 3.2vw, 3.7rem);
+  font-style: normal;
+  font-weight: 850;
+  line-height: 0.9;
+  text-shadow: 0 3px 5px rgba(7, 23, 47, 0.32);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart i {
+  display: none;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .watermark,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .hero-card-watermark,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart.popular-mini-card em {
+  color: rgba(255, 255, 255, 0.18);
+}
+
+.popular-mini-card.real-card-walmart::before {
+  left: -28%;
+  top: -26%;
+  width: 96%;
+}
+
+.popular-mini-card.real-card-walmart strong {
+  right: 11%;
+  bottom: 16%;
+  max-width: 58%;
+  font-size: 1.05rem;
+}
+
+.popular-mini-card.real-card-walmart em {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.22);
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1;
+  transform: rotate(-9deg);
+  text-shadow: 0 1px 1px rgba(7, 23, 47, 0.18);
+}
+
+.popular-mini-card.real-card-walmart .card-type,
+.popular-mini-card.real-card-walmart small {
+  display: none;
+}
+
+.hero-card-preview.real-card-walmart::before {
+  left: -30%;
+  top: -24%;
+  width: 94%;
+}
+
+.hero-card-preview.real-card-walmart strong {
+  right: 10%;
+  bottom: 18%;
+  max-width: 62%;
+  font-size: clamp(0.85rem, 3.2vw, 1.35rem);
+}
+
+.hero-card-preview.real-card-walmart .card-type,
+.hero-card-preview.real-card-walmart small {
+  display: none;
+}
+
+/* Logo-driven card system: official-style logo first, matching brand colors, no logo frame. */
+.real-card .brand-mark,
+.detail-real-card .brand-mark {
+  display: none !important;
+}
+
+.real-card .card-logo,
+.detail-real-card .card-logo,
+.home-product-card .real-card .card-logo,
+.hero-card-preview .hero-card-logo,
+.popular-mini-card .popular-mini-logo,
+.digital-mini-logo {
+  display: block !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  object-fit: contain;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  filter: drop-shadow(0 8px 14px rgba(7, 23, 47, 0.18)) !important;
+}
+
+.real-card .card-logo,
+.home-product-card .real-card .card-logo {
+  left: clamp(20px, 1.7vw, 30px);
+  right: auto;
+  top: clamp(50px, 3.8vw, 68px);
+  z-index: 2;
+  width: clamp(108px, 9.5vw, 160px);
+  height: clamp(58px, 5vw, 86px);
+}
+
+.detail-real-card .card-logo {
+  left: 32px;
+  right: auto;
+  top: 64px;
+  z-index: 2;
+  width: clamp(150px, 15vw, 230px);
+  height: clamp(78px, 7vw, 120px);
+}
+
+.hero-card-preview .hero-card-logo {
+  left: 16px;
+  right: auto;
+  top: 44px;
+  width: 54%;
+  height: 34%;
+}
+
+.popular-mini-card .popular-mini-logo {
+  left: 12px;
+  right: auto;
+  top: 16px;
+  width: 54%;
+  height: 36px;
+}
+
+.digital-mini-logo {
+  left: 18px;
+  right: auto;
+  top: 22px;
+  width: 58%;
+  height: 70px;
+}
+
+.real-card strong,
+.detail-real-card strong {
+  position: absolute;
+  left: clamp(20px, 1.7vw, 30px);
+  right: auto;
+  bottom: clamp(40px, 3vw, 58px);
+  z-index: 2;
+  max-width: 62%;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(7, 23, 47, 0.22);
+}
+
+.real-card small,
+.detail-real-card small {
+  position: absolute;
+  left: clamp(20px, 1.7vw, 30px);
+  right: auto;
+  bottom: clamp(22px, 1.8vw, 34px);
+  z-index: 2;
+  max-width: 62%;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.real-card .card-type,
+.detail-real-card .card-type {
+  position: absolute;
+  left: clamp(20px, 1.7vw, 30px);
+  top: clamp(20px, 1.5vw, 28px);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.real-card em,
+.detail-real-card em {
+  position: absolute;
+  right: clamp(20px, 1.7vw, 30px);
+  top: clamp(20px, 1.5vw, 28px);
+  z-index: 2;
+  margin: 0;
+  color: #ffffff;
+  background: transparent;
+  box-shadow: none;
+  font-size: clamp(1.1rem, 1.4vw, 1.55rem);
+  text-shadow: 0 2px 4px rgba(7, 23, 47, 0.22);
+}
+
+.real-card::after,
+.detail-real-card::after {
+  display: none;
+}
+
+.real-card i,
+.detail-real-card i {
+  display: none;
+}
+
+.real-card .watermark,
+.detail-real-card .watermark,
+.hero-card-watermark,
+.popular-mini-card em,
+.digital-mini-watermark {
+  z-index: 4;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart {
+  background:
+    radial-gradient(circle at 78% 22%, rgba(255, 255, 255, 0.2), transparent 24%),
+    linear-gradient(135deg, #0071ce 0%, #004f9e 100%);
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart::before {
+  display: none;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .card-logo,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .hero-card-logo,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-walmart .popular-mini-logo {
+  filter: drop-shadow(0 6px 10px rgba(7, 23, 47, 0.22)) !important;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart strong {
+  left: auto;
+  right: clamp(22px, 2vw, 34px);
+  bottom: clamp(34px, 2.6vw, 48px);
+  max-width: 58%;
+  text-align: right;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small {
+  left: auto;
+  right: clamp(22px, 2vw, 34px);
+  bottom: clamp(18px, 1.5vw, 28px);
+  max-width: 58%;
+  text-align: right;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-logo {
+  left: auto;
+  right: clamp(22px, 2vw, 34px);
+  top: auto;
+  bottom: clamp(34px, 2.6vw, 48px);
+  width: min(54%, 190px);
+  height: clamp(44px, 4vw, 64px);
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-type {
+  display: block;
+  left: clamp(22px, 2vw, 34px);
+  top: clamp(19px, 1.45vw, 27px);
+  color: rgba(255, 255, 255, 0.88);
+  width: auto;
+  height: auto;
+  font-size: clamp(0.78rem, 0.82vw, 0.94rem) !important;
+  line-height: 1;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small::after,
+:is(.real-card, .detail-real-card).real-card-walmart .card-type::after,
+:is(.real-card, .detail-real-card).real-card-walmart strong::after {
+  content: none;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart strong {
+  display: none;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small {
+  right: clamp(22px, 2vw, 34px);
+  bottom: clamp(16px, 1.5vw, 24px);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small::after {
+  content: "Digital delivery - USD";
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72em;
+  letter-spacing: 0;
+}
+
+:is(.real-card, .detail-real-card).real-card-amazon,
+:is(.real-card, .detail-real-card).real-card-amazon-prime,
+.hero-card-preview.real-card-amazon,
+.hero-card-preview.real-card-amazon-prime,
+.popular-mini-card.real-card-amazon,
+.popular-mini-card.real-card-amazon-prime {
+  background:
+    linear-gradient(135deg, #050505 0 68%, #ff9900 68% 73%, #151515 73% 100%);
+}
+
+:is(.real-card, .detail-real-card).real-card-netflix,
+.hero-card-preview.real-card-netflix,
+.popular-mini-card.real-card-netflix {
+  background:
+    linear-gradient(115deg, #070707 0 58%, #e50914 58% 66%, #1a0204 66% 100%);
+}
+
+:is(.real-card, .detail-real-card).real-card-starbucks,
+.hero-card-preview.real-card-starbucks,
+.popular-mini-card.real-card-starbucks {
+  background:
+    linear-gradient(90deg, #006241 0 68%, rgba(255, 255, 255, 0.9) 68% 72%, #00754a 72% 100%);
+}
+
+:is(.real-card, .detail-real-card).real-card-apple,
+:is(.real-card, .detail-real-card).real-card-apple-tvplus,
+.hero-card-preview.real-card-apple,
+.hero-card-preview.real-card-apple-tvplus,
+.popular-mini-card.real-card-apple,
+.popular-mini-card.real-card-apple-tvplus {
+  color: #111827;
+  background:
+    radial-gradient(circle at 74% 22%, rgba(0, 122, 255, 0.18), transparent 18%),
+    linear-gradient(135deg, #ffffff, #e5e7eb);
+}
+
+:is(.real-card, .detail-real-card).real-card-apple strong,
+:is(.real-card, .detail-real-card).real-card-apple-tvplus strong,
+:is(.real-card, .detail-real-card).real-card-apple small,
+:is(.real-card, .detail-real-card).real-card-apple-tvplus small,
+:is(.real-card, .detail-real-card).real-card-apple .card-type,
+:is(.real-card, .detail-real-card).real-card-apple-tvplus .card-type,
+:is(.real-card, .detail-real-card).real-card-apple em,
+:is(.real-card, .detail-real-card).real-card-apple-tvplus em {
+  color: #111827;
+  text-shadow: none;
+}
+
+:is(.real-card, .detail-real-card).real-card-apple .watermark,
+:is(.real-card, .detail-real-card).real-card-apple-tvplus .watermark {
+  color: rgba(17, 24, 39, 0.24);
+}
+
+@media (max-width: 620px) {
+  .home-product-card .real-card .card-logo,
+  .real-card .card-logo {
+    left: 12px;
+    top: 38px;
+    width: 74px;
+    height: 42px;
+    opacity: 1 !important;
+  }
+
+  .home-product-card .real-card strong {
+    left: 12px;
+    right: auto;
+    bottom: 31px;
+    max-width: 76%;
+    font-size: 0.92rem;
+  }
+
+  .home-product-card .real-card small {
+    left: 12px;
+    bottom: 13px;
+    max-width: 78%;
+  }
+
+  .home-product-card .real-card em {
+    right: 12px;
+    top: 13px;
+    font-size: 0.92rem;
+  }
+}
+
+/* Final production card layout: no broken logo boxes, clear details, price bottom-right. */
+.real-card,
+.detail-real-card,
+.hero-card-preview,
+.popular-mini-card,
+.digital-mini-card {
+  isolation: isolate;
+}
+
+.real-card .card-logo,
+.detail-real-card .card-logo,
+.home-product-card .real-card .card-logo,
+.hero-card-preview .hero-card-logo,
+.popular-mini-card .popular-mini-logo,
+.digital-mini-logo {
+  display: block !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  filter: drop-shadow(0 8px 14px rgba(7, 23, 47, 0.2)) !important;
+}
+
+.real-card .card-logo,
+.home-product-card .real-card .card-logo {
+  left: clamp(20px, 1.8vw, 30px);
+  right: auto;
+  top: clamp(50px, 3.8vw, 66px);
+  z-index: 3;
+  width: min(54%, 175px);
+  height: clamp(58px, 5.2vw, 86px);
+}
+
+.detail-real-card .card-logo {
+  left: 32px;
+  right: auto;
+  top: 64px;
+  z-index: 3;
+  width: min(56%, 245px);
+  height: clamp(80px, 7vw, 120px);
+}
+
+.brand-logo-fallback {
+  align-items: center;
+  justify-content: flex-start;
+  color: #ffffff;
+  font-size: clamp(1.45rem, 1.8vw, 2.2rem);
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 5px rgba(7, 23, 47, 0.24);
+}
+
+.real-card .watermark,
+.detail-real-card .watermark,
+.hero-card-watermark {
+  right: clamp(20px, 1.8vw, 30px);
+  top: clamp(48px, 3vw, 62px);
+  z-index: 4;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: clamp(0.9rem, 1.05vw, 1.2rem);
+  transform: rotate(-16deg);
+  text-shadow: 0 1px 2px rgba(7, 23, 47, 0.22);
+}
+
+.real-card .card-type,
+.detail-real-card .card-type {
+  left: clamp(20px, 1.8vw, 30px);
+  top: clamp(19px, 1.45vw, 27px);
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 950;
+}
+
+.real-card strong,
+.detail-real-card strong {
+  left: clamp(20px, 1.8vw, 30px);
+  right: auto;
+  bottom: clamp(40px, 3vw, 56px);
+  z-index: 3;
+  max-width: 62%;
+  color: #ffffff;
+}
+
+.real-card small,
+.detail-real-card small {
+  left: clamp(20px, 1.8vw, 30px);
+  right: auto;
+  bottom: clamp(20px, 1.7vw, 32px);
+  z-index: 3;
+  max-width: 64%;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.real-card em,
+.detail-real-card em {
+  right: clamp(20px, 1.8vw, 30px);
+  top: auto;
+  bottom: clamp(20px, 1.7vw, 32px);
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  background: transparent;
+  box-shadow: none;
+  font-size: clamp(1.45rem, 2vw, 2.35rem);
+  font-style: normal;
+  font-weight: 950;
+  line-height: 0.95;
+  text-shadow: 0 2px 5px rgba(7, 23, 47, 0.26);
+}
+
+.real-card::after,
+.detail-real-card::after,
+.real-card i,
+.detail-real-card i {
+  display: none;
+}
+
+.home-product-card .real-card::before,
+.real-card::before,
+.detail-real-card::before {
+  display: block;
+  background:
+    linear-gradient(120deg, transparent 0 56%, rgba(255, 255, 255, 0.13) 56% 61%, transparent 61%),
+    radial-gradient(circle at 26% 95%, rgba(255, 255, 255, 0.12), transparent 27%);
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart {
+  background:
+    radial-gradient(circle at 76% 18%, rgba(255, 255, 255, 0.18), transparent 22%),
+    linear-gradient(135deg, #0071ce 0%, #005aab 54%, #004f9e 100%);
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-logo {
+  left: clamp(22px, 2vw, 34px);
+  right: auto;
+  top: clamp(54px, 4vw, 72px);
+  bottom: auto;
+  width: min(62%, 210px);
+  height: clamp(58px, 5.2vw, 84px);
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart strong {
+  display: none;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small {
+  left: clamp(22px, 2vw, 34px);
+  right: auto;
+  bottom: clamp(21px, 1.7vw, 32px);
+  max-width: 58%;
+  color: rgba(255, 255, 255, 0.86);
+  text-align: left;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small::after {
+  content: "Digital delivery • USD";
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72em;
+  letter-spacing: 0;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-type::after,
+:is(.real-card, .detail-real-card).real-card-walmart strong::after {
+  content: none;
+}
+
+.hero-card-preview {
+  animation: heroCardLogoSwap 1600ms ease both;
+}
+
+.hero-card-preview .hero-card-logo {
+  left: 14px;
+  right: auto;
+  top: 46px;
+  width: 58%;
+  height: 32%;
+}
+
+.hero-card-preview strong {
+  position: absolute;
+  left: 14px;
+  bottom: 24px;
+  z-index: 3;
+  max-width: 70%;
+}
+
+.hero-card-preview small {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  z-index: 3;
+  max-width: 70%;
+}
+
+.hero-card-preview em {
+  right: 14px;
+  top: auto;
+  bottom: 14px;
+  z-index: 3;
+}
+
+.popular-mini-card .popular-mini-logo {
+  left: 12px;
+  right: auto;
+  top: 16px;
+  width: 62%;
+  height: 38px;
+}
+
+.popular-mini-card em {
+  right: 10px;
+  top: 17px;
+  color: rgba(255, 255, 255, 0.28);
+  transform: rotate(-13deg);
+}
+
+@keyframes heroCardLogoSwap {
+  0% {
+    opacity: 0;
+    filter: saturate(0.8);
+  }
+  22%,
+  100% {
+    opacity: 1;
+    filter: saturate(1);
+  }
+}
+
+@media (max-width: 620px) {
+  .home-product-card .real-card .card-logo,
+  .real-card .card-logo {
+    left: 12px;
+    top: 39px;
+    width: min(65%, 92px);
+    height: 43px;
+  }
+
+  .home-product-card .real-card .watermark {
+    right: 9px;
+    top: 42px;
+    font-size: 0.68rem;
+  }
+
+  .home-product-card .real-card em {
+    right: 11px;
+    top: auto;
+    bottom: 13px;
+    font-size: 1rem;
+  }
+
+  .home-product-card .real-card strong {
+    left: 12px;
+    bottom: 31px;
+    max-width: 58%;
+  }
+
+  .home-product-card .real-card small {
+    left: 12px;
+    bottom: 12px;
+    max-width: 58%;
+  }
+}
+
+/* Walmart detail correction: keep label/details compact and readable. */
+:is(.real-card, .detail-real-card).real-card-walmart .card-type {
+  display: block !important;
+  width: max-content !important;
+  height: auto !important;
+  max-width: 70%;
+  font-size: clamp(0.78rem, 0.82vw, 0.94rem) !important;
+  line-height: 1 !important;
+  transform: none !important;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small {
+  width: min(58%, 185px);
+  height: auto;
+  font-size: clamp(0.72rem, 0.78vw, 0.86rem) !important;
+  line-height: 1.18 !important;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small::after {
+  content: "Digital delivery - USD" !important;
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72em;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-type::after,
+:is(.real-card, .detail-real-card).real-card-walmart strong::after {
+  content: none !important;
+}
+
+/* Final card polish: keep logos, text, watermark, and prices in separate clear zones. */
+.real-card .card-logo,
+.home-product-card .real-card .card-logo {
+  left: clamp(20px, 1.8vw, 30px) !important;
+  top: clamp(42px, 3.2vw, 54px) !important;
+  width: min(50%, 154px) !important;
+  height: clamp(42px, 4vw, 58px) !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.detail-real-card .card-logo {
+  left: clamp(28px, 2.2vw, 38px) !important;
+  top: clamp(58px, 4.5vw, 76px) !important;
+  width: min(52%, 220px) !important;
+  height: clamp(64px, 6.1vw, 94px) !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.real-card .brand-logo-fallback,
+.detail-real-card .brand-logo-fallback,
+.hero-card-preview .brand-logo-fallback,
+.popular-mini-card .brand-logo-fallback,
+.digital-mini-card .brand-logo-fallback {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.real-card .watermark,
+.detail-real-card .watermark {
+  top: clamp(46px, 3.25vw, 60px) !important;
+  right: clamp(20px, 1.8vw, 30px) !important;
+  max-width: 34% !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+.real-card strong,
+.detail-real-card strong {
+  top: auto !important;
+  bottom: clamp(44px, 3.2vw, 58px) !important;
+  max-width: 54% !important;
+  line-height: 0.98 !important;
+}
+
+.real-card small,
+.detail-real-card small {
+  top: auto !important;
+  bottom: clamp(22px, 1.65vw, 32px) !important;
+  max-width: 54% !important;
+  line-height: 1.12 !important;
+}
+
+.real-card em,
+.detail-real-card em {
+  top: auto !important;
+  bottom: clamp(22px, 1.65vw, 32px) !important;
+  right: clamp(20px, 1.85vw, 32px) !important;
+  max-width: 34% !important;
+  text-align: right !important;
+}
+
+.real-card .card-type,
+.detail-real-card .card-type {
+  top: clamp(18px, 1.35vw, 25px) !important;
+  max-width: 48% !important;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-razer-gold {
+  background:
+    radial-gradient(circle at 22% 54%, rgba(246, 191, 62, 0.25), transparent 17%),
+    linear-gradient(135deg, #050805 0 68%, #44d62c 68% 100%) !important;
+}
+
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-razer-gold .card-logo,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-razer-gold .hero-card-logo,
+:is(.real-card, .detail-real-card, .hero-card-preview, .popular-mini-card).real-card-razer-gold .popular-mini-logo {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28)) !important;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-logo {
+  top: clamp(46px, 3.5vw, 62px) !important;
+  width: min(54%, 178px) !important;
+  height: clamp(46px, 4.4vw, 64px) !important;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart .card-type {
+  color: #ffc220 !important;
+}
+
+:is(.real-card, .detail-real-card).real-card-walmart small {
+  bottom: clamp(22px, 1.65vw, 32px) !important;
+  max-width: 54% !important;
+}
+
+.hero-card-preview {
+  animation: heroCardDeckSwap 1600ms cubic-bezier(0.2, 0.8, 0.2, 1) both !important;
+}
+
+.hero-card-preview .hero-card-logo {
+  left: 14px !important;
+  top: clamp(44px, 5.1vw, 58px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: min(48%, 145px) !important;
+  height: clamp(34px, 7vw, 52px) !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.hero-card-preview strong {
+  left: 14px !important;
+  top: auto !important;
+  bottom: 44px !important;
+  max-width: 50% !important;
+  line-height: 0.98 !important;
+}
+
+.hero-card-preview small {
+  left: 14px !important;
+  top: auto !important;
+  bottom: 28px !important;
+  max-width: 52% !important;
+  line-height: 1.05 !important;
+}
+
+.hero-card-preview .hero-card-watermark {
+  top: 48px !important;
+  right: 18px !important;
+  max-width: 35% !important;
+  white-space: nowrap !important;
+}
+
+.hero-card-preview .hero-card-price-stack {
+  position: absolute;
+  top: auto;
+  right: 14px;
+  bottom: 14px;
+  z-index: 5;
+  display: grid;
+  gap: 2px;
+  justify-items: end;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.hero-card-preview .hero-card-price-stack del {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(0.62rem, 0.9vw, 0.82rem);
+  font-weight: 950;
+  text-shadow: 0 1px 3px rgba(7, 23, 47, 0.28);
+}
+
+.hero-card-preview .hero-card-price-stack em {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  margin: 0 !important;
+  max-width: none !important;
+  color: #ffffff !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: clamp(1rem, 1.55vw, 1.28rem) !important;
+  font-style: normal !important;
+  font-weight: 950 !important;
+  line-height: 1 !important;
+  text-align: right !important;
+}
+
+.popular-mini-card .popular-mini-logo {
+  top: 13px !important;
+  left: 12px !important;
+  width: min(54%, 126px) !important;
+  height: 34px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.popular-mini-card strong {
+  max-width: 66% !important;
+}
+
+@keyframes heroCardDeckSwap {
+  0% {
+    opacity: 0;
+    translate: 0 14px;
+    scale: 0.965;
+    filter: saturate(0.88) blur(0.6px);
+  }
+  28%,
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    filter: saturate(1) blur(0);
+  }
+}
+
+@media (max-width: 620px) {
+  .home-product-card .real-card .card-logo,
+  .real-card .card-logo {
+    left: 12px !important;
+    top: 27px !important;
+    width: min(46%, 74px) !important;
+    height: 24px !important;
+  }
+
+  .home-product-card .real-card .watermark,
+  .real-card .watermark {
+    top: 31px !important;
+    right: 10px !important;
+    max-width: 35% !important;
+    font-size: 0.64rem !important;
+  }
+
+  .home-product-card .real-card .card-type,
+  .real-card .card-type {
+    top: 12px !important;
+    left: 12px !important;
+    font-size: 0.6rem !important;
+  }
+
+  .home-product-card .real-card strong,
+  .real-card strong {
+    left: 12px !important;
+    top: auto !important;
+    bottom: 31px !important;
+    max-width: 56% !important;
+    font-size: 0.86rem !important;
+  }
+
+  .home-product-card .real-card small,
+  .real-card small {
+    left: 12px !important;
+    top: auto !important;
+    bottom: 13px !important;
+    max-width: 58% !important;
+    height: 12px !important;
+    font-size: 0.66rem !important;
+    line-height: 12px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .home-product-card .real-card em,
+  .real-card em {
+    right: 11px !important;
+    top: auto !important;
+    bottom: 13px !important;
+    max-width: 35% !important;
+    font-size: 0.95rem !important;
+  }
+
+  .hero-card-preview .hero-card-logo {
+    top: 24px !important;
+    bottom: auto !important;
+    width: min(48%, 52px) !important;
+    height: 18px !important;
+  }
+
+  .hero-card-preview strong {
+    top: auto !important;
+    bottom: 17px !important;
+    max-width: 52% !important;
+    height: 14px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 0.68rem !important;
+    line-height: 14px !important;
+  }
+
+  .hero-card-preview small {
+    top: auto !important;
+    bottom: 5px !important;
+    max-width: 52% !important;
+    height: 9px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 0.42rem !important;
+    line-height: 9px !important;
+  }
+
+  .hero-card-preview .hero-card-price-stack {
+    right: 8px;
+    bottom: 4px;
+  }
+
+  .hero-card-preview .hero-card-price-stack del {
+    font-size: 0.42rem !important;
+  }
+
+  .hero-card-preview .hero-card-price-stack em {
+    font-size: 0.62rem !important;
+  }
+
+  .hero-card-preview .hero-card-watermark {
+    top: 29px !important;
+    right: 8px !important;
+    max-width: 38% !important;
+    font-size: 0.54rem !important;
+  }
+
+  :is(.real-card, .detail-real-card).real-card-walmart small::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  :is(.real-card, .detail-real-card).real-card-walmart small {
+    bottom: 13px !important;
+    height: 12px !important;
+    max-width: 56% !important;
+    line-height: 12px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 }

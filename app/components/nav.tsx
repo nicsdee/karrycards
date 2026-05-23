@@ -3,7 +3,7 @@
 import { Menu, Search, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Category } from "../data";
 
@@ -28,6 +28,7 @@ export default function Nav({
   showSearch = true
 }: NavProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [localQuery, setLocalQuery] = useState("");
   const [storedCartCount, setStoredCartCount] = useState(0);
@@ -55,6 +56,10 @@ export default function Nav({
     }
 
     setLocalQuery(value);
+    const search = value.trim();
+    if (search) {
+      router.push(`/?search=${encodeURIComponent(search)}#catalog`);
+    }
   }
 
   return (

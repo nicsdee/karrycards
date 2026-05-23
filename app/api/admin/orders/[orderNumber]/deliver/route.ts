@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireAdmin } from "../../../../../lib/server/admin-auth";
 import { notifyOwner } from "../../../../../lib/server/notifications";
 import { StoredDelivery, updateOrder } from "../../../../../lib/server/orders";
+import { sendGiftCardDeliveryEmail } from "../../../../../lib/server/email";
+import { updateCheckoutActivityByOrder } from "../../../../../lib/server/checkout-activity";
 
 export const runtime = "nodejs";
 
@@ -57,6 +59,11 @@ export async function PATCH(request: Request, context: { params: Promise<{ order
     return NextResponse.json({ message: "Order not found." }, { status: 404 });
   }
 
+  await updateCheckoutActivityByOrder(orderNumber, (activity) => ({
+    ...activity,
+    status: "delivered"
+  }));
+  await sendGiftCardDeliveryEmail(updated);
   await notifyOwner(updated, "delivered");
   return NextResponse.json({ order: updated });
 }

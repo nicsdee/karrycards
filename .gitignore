@@ -28,6 +28,8 @@ pids
 *.seed
 *.pid.lock
 /data/orders.json
+/data/checkout-activity.json
+/data/email-outbox.json
 
 # Environment variables
 .env

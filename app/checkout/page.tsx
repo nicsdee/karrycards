@@ -56,6 +56,7 @@ export default function CheckoutPage() {
   const [cryptoPayment, setCryptoPayment] = useState<CryptoPayment | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cartLoaded, setCartLoaded] = useState(false);
+  const [checkoutActivityId, setCheckoutActivityId] = useState("");
 
   useEffect(() => {
     const saved = window.localStorage.getItem("karrycards-cart");
@@ -91,6 +92,35 @@ export default function CheckoutPage() {
   const priceQuote = useMemo(() => quoteCart(groupedCart), [groupedCart]);
   const total = priceQuote.total;
   const discount = priceQuote.discount;
+  const activityItems = useMemo(() => groupedCart.map((item) => ({
+    slug: item.slug,
+    amount: item.amount,
+    quantity: item.quantity
+  })), [groupedCart]);
+
+  useEffect(() => {
+    if (!cartLoaded || !activityItems.length) return;
+
+    const savedActivityId = window.localStorage.getItem("karrycards-checkout-activity-id") || checkoutActivityId;
+    fetch("/api/checkout/activity", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        id: savedActivityId || undefined,
+        items: activityItems
+      })
+    })
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => {
+        if (!data?.activity?.id) return;
+        setCheckoutActivityId(data.activity.id);
+        window.localStorage.setItem("karrycards-checkout-activity-id", data.activity.id);
+      })
+      .catch(() => undefined);
+  }, [activityItems, cartLoaded, checkoutActivityId]);
 
   function removeOne(slug: string, amount: number) {
     setCart((current) => {
@@ -118,8 +148,24 @@ export default function CheckoutPage() {
     event.preventDefault();
     setIsSubmitting(true);
     setMessage("Creating crypto checkout...");
+    const form = new FormData(event.currentTarget);
+    const customerName = String(form.get("customerName") || "Customer").trim();
+    const customerEmail = String(form.get("customerEmail") || "").trim();
+    const customerPhone = String(form.get("customerPhone") || "").trim();
+
+    if (!customerEmail || !customerEmail.includes("@")) {
+      setIsSubmitting(false);
+      setMessage("Enter the email address that should receive the gift card code.");
+      return;
+    }
 
     const payload = {
+      checkoutActivityId: checkoutActivityId || window.localStorage.getItem("karrycards-checkout-activity-id") || undefined,
+      customer: {
+        name: customerName || "Customer",
+        email: customerEmail,
+        phone: customerPhone || undefined
+      },
       items: groupedCart.map((item) => ({
         slug: item.slug,
         amount: item.amount,
@@ -144,6 +190,7 @@ export default function CheckoutPage() {
       }
 
       window.localStorage.setItem("karrycards-last-order", data.order.orderNumber);
+      window.localStorage.removeItem("karrycards-checkout-activity-id");
       setCryptoPayment(data.payment);
       setMessage(`Order ${data.order.orderNumber} created. Redirecting to crypto checkout...`);
       window.location.href = data.payment.checkoutUrl;
@@ -162,13 +209,29 @@ export default function CheckoutPage() {
           <div className="payment-panel">
             <p className="eyebrow">Secure checkout</p>
             <h1>Complete your order</h1>
-            <p className="checkout-intro"> Pay the discounted price using your preferred coin. The payment page handles coin selection, wallet address, and QR code. Your receipt and gift card code are delivered automatically via email within seconds of blockchain confirmation.</p>
+            <p className="checkout-intro"> Pay the discounted price using your preferred coin. The payment page handles coin selection, wallet address, and QR code. Your receipt and gift card code are delivered to the email you enter below after blockchain confirmation.</p>
            
 
             <form className="payment-form" onSubmit={submitOrder}>
+              <div className="checkout-customer-box">
+                <strong>Delivery email</strong>
+                <label>
+                  Full name
+                  <input name="customerName" autoComplete="name" placeholder="Customer name" />
+                </label>
+                <label>
+                  Email for gift card code
+                  <input name="customerEmail" autoComplete="email" inputMode="email" placeholder="name@example.com" required type="email" />
+                </label>
+                <label>
+                  Phone optional
+                  <input name="customerPhone" autoComplete="tel" inputMode="tel" placeholder="Optional phone number" />
+                </label>
+              </div>
+
               <div className="crypto-box crypto-payment-box">
                 <strong><WalletCards size={18} /> Crypto checkout</strong>
-                <p>Your Gift card code arrives instantly via email, within seconds of blockchain confirmation.</p>
+                <p>Your gift card code is sent to your email after blockchain confirmation and fulfillment.</p>
                 <div className="checkout-coin-row" aria-label="Popular supported coins">
                   {cryptoIcons.map((coin) => (
                     <span className="checkout-coin" key={coin.code} title={coin.name}>

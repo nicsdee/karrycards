@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BrandLogoImage } from "../../components/BrandLogoImage";
 import CartToast from "../../components/CartToast";
 import Footer from "../../components/Footer";
 import Nav from "../../components/nav";
@@ -109,12 +110,14 @@ export default function CardDetailPage() {
         <section className="product-detail">
           <div className="detail-gallery">
             <div className="detail-card-stage">
-              <div className="detail-real-card" style={{ "--card-color": card.color } as React.CSSProperties}>
+              <div className={`detail-real-card real-card-${card.slug}`} style={{ "--card-color": card.color } as React.CSSProperties}>
                 <span className="watermark">@KarryCards</span>
+                <BrandLogoImage brand={card.brand} className="card-logo" />
+                <span className="brand-mark" aria-hidden="true">{card.brand.slice(0, 1)}</span>
                 <span className="card-type">Gift Card</span>
                 <strong>{card.brand}</strong>
                 <small>{card.productName}</small>
-                <em>{money(selectedSaleAmount)}</em>
+                <em>{money(selectedAmount)}</em>
                 <i />
               </div>
             </div>

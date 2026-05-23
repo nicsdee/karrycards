@@ -26,6 +26,7 @@ export type StoredDelivery = {
 
 export type StoredOrder = {
   orderNumber: string;
+  checkoutActivityId?: string;
   customer: {
     name: string;
     email: string;

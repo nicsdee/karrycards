@@ -55,7 +55,37 @@ type OrdersResponse = {
     pending: number;
     delivered: number;
   };
+  checkoutTotals: {
+    opened: number;
+    pending: number;
+    paid: number;
+    delivered: number;
+    failed: number;
+  };
+  checkouts: AdminCheckoutActivity[];
   orders: AdminOrder[];
+};
+
+type AdminCheckoutActivity = {
+  id: string;
+  orderNumber?: string;
+  customer?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+  };
+  items: Array<{
+    slug: string;
+    brand: string;
+    productName: string;
+    amount: number;
+    quantity: number;
+  }>;
+  subtotal: number;
+  total: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 function formatMoney(amount: number, currency = "USD") {
@@ -74,9 +104,38 @@ function orderAge(date: string) {
   return `${Math.round(minutes / 60)} hr`;
 }
 
+function formatAdminCode(brand: string, code?: string) {
+  if (!code) return "";
+  const masks: Record<string, number[]> = {
+    amazon: [4, 6, 4, 4],
+    "amazon prime": [4, 6, 4, 4],
+    apple: [4, 4, 4, 4],
+    netflix: [4, 4, 4, 4],
+    playstation: [4, 4, 4],
+    "razer gold": [4, 4, 4, 4],
+    razer: [4, 4, 4, 4],
+    steam: [5, 5, 5],
+    walmart: [4, 4, 4, 4],
+    xbox: [5, 5, 5, 5, 5],
+    "xbox game pass": [5, 5, 5, 5, 5]
+  };
+  const cleaned = code.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+  const mask = masks[brand.toLowerCase()] || [4, 4, 4, 4];
+  let cursor = 0;
+  const parts = mask.map((size) => {
+    const part = cleaned.slice(cursor, cursor + size);
+    cursor += size;
+    return part;
+  }).filter(Boolean);
+  if (cursor < cleaned.length) parts.push(cleaned.slice(cursor));
+  return parts.join("-");
+}
+
 export default function AdminPage() {
   const [orders, setOrders] = useState<AdminOrder[]>([]);
   const [totals, setTotals] = useState<OrdersResponse["totals"] | null>(null);
+  const [checkoutTotals, setCheckoutTotals] = useState<OrdersResponse["checkoutTotals"] | null>(null);
+  const [checkouts, setCheckouts] = useState<AdminCheckoutActivity[]>([]);
   const [token, setToken] = useState("");
   const [message, setMessage] = useState("Enter your admin token.");
   const [isLoading, setIsLoading] = useState(false);
@@ -100,13 +159,15 @@ export default function AdminPage() {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const nextToken = String(form.get("token") || "");
-    window.localStorage.setItem("karrycards-admin-token", nextToken);
-    setToken(nextToken);
-    await loadOrders(nextToken);
+    const opened = await loadOrders(nextToken, true);
+    if (opened) {
+      window.localStorage.setItem("karrycards-admin-token", nextToken);
+      setToken(nextToken);
+    }
   }
 
-  async function loadOrders(authToken = token) {
-    if (!authToken) return;
+  async function loadOrders(authToken = token, isLogin = false) {
+    if (!authToken) return false;
 
     setIsLoading(true);
     setMessage("Loading orders...");
@@ -121,15 +182,29 @@ export default function AdminPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(data.message || "Could not load orders.");
-        return;
+        if (response.status === 401) {
+          window.localStorage.removeItem("karrycards-admin-token");
+          setToken("");
+          setOrders([]);
+          setTotals(null);
+          setCheckoutTotals(null);
+          setCheckouts([]);
+          setMessage("Wrong login. Enter the correct admin token.");
+        } else {
+          setMessage(data.message || "Could not load orders.");
+        }
+        return false;
       }
 
       setOrders(data.orders ?? []);
       setTotals(data.totals ?? null);
-      setMessage(`${data.totals?.paid ?? 0} order(s) waiting.`);
+      setCheckoutTotals(data.checkoutTotals ?? null);
+      setCheckouts(data.checkouts ?? []);
+      setMessage(isLogin ? "Order desk unlocked." : `${data.totals?.paid ?? 0} order(s) waiting.`);
+      return true;
     } catch {
       setMessage("Admin API is not reachable.");
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -182,6 +257,8 @@ export default function AdminPage() {
     setToken("");
     setOrders([]);
     setTotals(null);
+    setCheckoutTotals(null);
+    setCheckouts([]);
     setMessage("Signed out.");
   }
 
@@ -217,6 +294,7 @@ export default function AdminPage() {
             <>
               <section className="ops-metrics" aria-label="Order metrics">
                 {[
+                  ["Checkouts", checkouts.length],
                   ["Waiting", totals?.paid ?? 0],
                   ["Pending", totals?.pending ?? 0],
                   ["Delivered", totals?.delivered ?? 0],
@@ -231,6 +309,7 @@ export default function AdminPage() {
 
               <section className="ops-chart" aria-label="Order activity">
                 {[
+                  ["Opened", checkoutTotals?.opened ?? 0],
                   ["Waiting", totals?.paid ?? 0],
                   ["Pending", totals?.pending ?? 0],
                   ["Delivered", totals?.delivered ?? 0]
@@ -287,11 +366,35 @@ export default function AdminPage() {
                       <span>
                         <strong>{order.orderNumber}</strong>
                         <small>{order.items.map((item) => item.brand).join(", ")}</small>
+                        {order.deliveries?.some((delivery) => delivery.status === "ready") ? (
+                          <code>
+                            {order.deliveries
+                              .filter((delivery) => delivery.status === "ready")
+                              .map((delivery) => delivery.code ? `${delivery.productName}: ${formatAdminCode(delivery.brand, delivery.code)}` : delivery.claimUrl || "Ready")
+                              .join(" | ")}
+                          </code>
+                        ) : null}
                       </span>
                       <em>{order.status}</em>
                     </article>
                   ))}
                   {!orders.length ? <p className="ops-empty">No orders yet.</p> : null}
+                </div>
+
+                <div className="ops-column">
+                  <h2>Checkout activity</h2>
+                  {checkouts.slice(0, 10).map((checkout) => (
+                    <article className="ops-checkout-row" key={checkout.id}>
+                      <div>
+                        <strong>{checkout.customer?.email || "Email not entered yet"}</strong>
+                        <small>{checkout.items.map((item) => `${item.brand} x${item.quantity}`).join(", ")}</small>
+                        {checkout.orderNumber ? <span>{checkout.orderNumber}</span> : null}
+                      </div>
+                      <em>{checkout.status}</em>
+                      <b>{formatMoney(checkout.total)}</b>
+                    </article>
+                  ))}
+                  {!checkouts.length ? <p className="ops-empty">No checkout visits yet.</p> : null}
                 </div>
               </section>
             </>

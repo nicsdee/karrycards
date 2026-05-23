@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { BrandLogoImage } from "../../components/BrandLogoImage";
 import CartToast from "../../components/CartToast";
 import Footer from "../../components/Footer";
 import Nav from "../../components/nav";
@@ -38,8 +39,10 @@ function ProductCard({
       <Link className="card-link" href={`/cards/${card.slug}`}>
         <div className="visual-wrap">
           <div className="badge">{card.badge}</div>
-          <div className="real-card" style={{ "--card-color": card.color } as React.CSSProperties}>
+          <div className={`real-card real-card-${card.slug}`} style={{ "--card-color": card.color } as React.CSSProperties}>
             <span className="watermark">@KarryCards</span>
+            <BrandLogoImage brand={card.brand} className="card-logo" />
+            <span className="brand-mark" aria-hidden="true">{card.brand.slice(0, 1)}</span>
             <span className="card-type">Gift Card</span>
             <strong>{card.brand}</strong>
             <small>{card.productName}</small>

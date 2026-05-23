@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
+import { BrandLogoImage } from "../components/BrandLogoImage";
 import CartToast from "../components/CartToast";
 import Footer from "../components/Footer";
 import Nav from "../components/nav";
@@ -55,8 +56,10 @@ function ProductCard({
       <Link className="card-link" href={`/cards/${card.slug}`} aria-label={`View ${card.productName}`}>
         <div className="visual-wrap">
           <div className="badge">{card.badge}</div>
-          <div className="real-card" style={{ "--card-color": card.color } as CSSProperties}>
+          <div className={`real-card real-card-${card.slug}`} style={{ "--card-color": card.color } as CSSProperties}>
             <span className="watermark">@KarryCards</span>
+            <BrandLogoImage brand={card.brand} className="card-logo" />
+            <span className="brand-mark" aria-hidden="true">{card.brand.slice(0, 1)}</span>
             <span className="card-type">Gift Card</span>
             <strong>{card.brand}</strong>
             <small>{card.productName}</small>
@@ -118,6 +121,16 @@ export default function OurDigitalGiftCardsPage() {
   }, []);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get("search") || params.get("q") || "";
+    if (!search) return;
+
+    setQuery(search);
+    setActiveCategory("All");
+    window.setTimeout(() => document.querySelector(".digital-catalog-panel")?.scrollIntoView({ block: "start" }), 120);
+  }, []);
+
+  useEffect(() => {
     const saved = window.localStorage.getItem("karrycards-cart");
     if (saved) setCart(JSON.parse(saved) as CartItem[]);
     setCartLoaded(true);
@@ -142,11 +155,22 @@ export default function OurDigitalGiftCardsPage() {
 
     return catalog.giftCards.filter((card) => {
       const matchesCategory = activeCategory === "All" || card.category === activeCategory;
+      const searchable = `${card.brand} ${card.productName} ${card.category} ${card.slug} ${card.description} ${getCategoryLabel(card)}`.toLowerCase();
       const matchesQuery =
         !search ||
-        `${card.brand} ${card.productName} ${card.category} ${getCategoryLabel(card)}`.toLowerCase().includes(search);
+        searchable.includes(search);
 
       return matchesCategory && matchesQuery;
+    }).sort((first, second) => {
+      if (!search) return 0;
+
+      const firstBrand = first.brand.toLowerCase();
+      const secondBrand = second.brand.toLowerCase();
+      const firstProduct = first.productName.toLowerCase();
+      const secondProduct = second.productName.toLowerCase();
+      const firstScore = firstBrand === search ? 0 : firstBrand.startsWith(search) ? 1 : firstProduct.startsWith(search) ? 2 : firstProduct.includes(search) ? 3 : 4;
+      const secondScore = secondBrand === search ? 0 : secondBrand.startsWith(search) ? 1 : secondProduct.startsWith(search) ? 2 : secondProduct.includes(search) ? 3 : 4;
+      return firstScore - secondScore || first.brand.localeCompare(second.brand);
     });
   }, [activeCategory, catalog.giftCards, query]);
 
@@ -173,6 +197,18 @@ export default function OurDigitalGiftCardsPage() {
     setToastMessage("Item quantity has been updated.");
   }
 
+  function handleSearch(value: string) {
+    setQuery(value);
+    setActiveCategory("All");
+
+    const search = value.trim();
+    window.history.replaceState(null, "", search ? `/our-digital-gift-cards?search=${encodeURIComponent(search)}` : "/our-digital-gift-cards");
+
+    if (search) {
+      window.setTimeout(() => document.querySelector(".digital-catalog-panel")?.scrollIntoView({ block: "start" }), 80);
+    }
+  }
+
   useEffect(() => {
     if (!toastMessage) return;
     const timeout = window.setTimeout(() => setToastMessage(""), 2000);
@@ -185,7 +221,7 @@ export default function OurDigitalGiftCardsPage() {
         activeSlug={activeCategory === "All" ? undefined : catalog.categories.find((category) => category.name === activeCategory)?.slug}
         cartCount={cart.length}
         categories={catalog.categories}
-        onQueryChange={setQuery}
+        onQueryChange={handleSearch}
         query={query}
         searchPlaceholder="Search digital gift cards"
       />
@@ -207,6 +243,8 @@ export default function OurDigitalGiftCardsPage() {
                 key={card.slug}
                 style={{ "--card-color": card.color } as CSSProperties}
               >
+                <b className="digital-mini-watermark">@KarryCards</b>
+                <BrandLogoImage brand={card.brand} className="digital-mini-logo" />
                 <span>{card.brand}</span>
                 <strong>{money(card.price)}</strong>
               </div>

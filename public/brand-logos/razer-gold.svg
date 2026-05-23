@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 180" role="img" aria-label="Razer Gold">
+  <defs>
+    <radialGradient id="coinFace" cx="35%" cy="28%" r="72%">
+      <stop offset="0" stop-color="#fff7b8"/>
+      <stop offset="0.36" stop-color="#f8c94c"/>
+      <stop offset="0.7" stop-color="#c88712"/>
+      <stop offset="1" stop-color="#744608"/>
+    </radialGradient>
+    <linearGradient id="coinEdge" x1="0" x2="1">
+      <stop offset="0" stop-color="#7a4708"/>
+      <stop offset="0.5" stop-color="#ffe27b"/>
+      <stop offset="1" stop-color="#9b5b09"/>
+    </linearGradient>
+  </defs>
+  <circle cx="72" cy="88" r="56" fill="url(#coinEdge)"/>
+  <circle cx="72" cy="88" r="45" fill="url(#coinFace)"/>
+  <path d="M91 55 51 88h28l-34 38 51-45H69z" fill="#9d5b08"/>
+  <text x="150" y="78" fill="#45d62d" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="700" letter-spacing="8">RAZER</text>
+  <text x="150" y="132" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="500">Gold</text>
+</svg>

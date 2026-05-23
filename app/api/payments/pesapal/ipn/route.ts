@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { fulfillGiftbitOrder } from "../../../../lib/server/giftbit";
+import { updateCheckoutActivityByOrder } from "../../../../lib/server/checkout-activity";
+import { sendGiftCardDeliveryEmail } from "../../../../lib/server/email";
+import { autoFulfillPaidOrder } from "../../../../lib/server/fulfillment";
 import { notifyOwner } from "../../../../lib/server/notifications";
 import { updateOrder } from "../../../../lib/server/orders";
 import { getPesapalTransactionStatus } from "../../../../lib/server/pesapal";
@@ -36,21 +38,25 @@ async function handlePesapalNotification(input: {
     return { ok: false, status: 404, message: "Order not found." };
   }
 
-  if (isPaid && updated.supplierStatus === "not_started") {
-    const deliveries = await fulfillGiftbitOrder(updated);
-    const hasFailure = deliveries.some((delivery) => delivery.status === "failed");
-    updated = await updateOrder(updated.orderNumber, (order) => ({
-      ...order,
-      status: hasFailure ? "supplier_failed" : "delivered",
-      supplierStatus: hasFailure ? "failed" : "fulfilled",
-      deliveries
+  if (isPaid) {
+    const fulfilled = await autoFulfillPaidOrder(updated);
+    await updateCheckoutActivityByOrder(updated.orderNumber, (activity) => ({
+      ...activity,
+      status: fulfilled.status === "delivered" ? "delivered" : "paid"
     }));
 
-    if (updated) {
-      await notifyOwner(updated, hasFailure ? "failed" : "delivered");
+    if (fulfilled.status === "delivered") {
+      await sendGiftCardDeliveryEmail(fulfilled);
+      await notifyOwner(fulfilled, "delivered");
+    } else {
+      await notifyOwner(fulfilled, "paid");
     }
-  } else if (isPaid) {
-    await notifyOwner(updated, "paid");
+  } else if (status.status_code === 2) {
+    await updateCheckoutActivityByOrder(updated.orderNumber, (activity) => ({
+      ...activity,
+      status: "failed"
+    }));
+    await notifyOwner(updated, "failed");
   }
 
   return { ok: true, status: 200, order: updated };
