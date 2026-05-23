@@ -5,9 +5,9 @@ import Nav from "../components/nav";
 import { fallbackCatalog } from "../lib/catalog";
 
 export const metadata: Metadata = {
-  title: "About Us | Trusted Digital Gift Cards Since 2013",
+  title: "About Us | Digital Gift Cards for US Shoppers",
   description:
-    "KarryCards has helped customers buy trusted digital gift cards online since 2013, with fast payment confirmation, secure checkout, and email delivery for global shoppers.",
+    "Learn about KarryCards, a digital gift card store for US shoppers with secure checkout, clear order tracking, and email delivery after payment confirmation.",
   keywords: [
     "about KarryCards",
     "trusted gift card store",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     canonical: "/about-us"
   },
   openGraph: {
-    title: "About KarryCards | Digital Gift Cards Since 2013",
+    title: "About KarryCards | Digital Gift Cards for US Shoppers",
     description:
-      "KarryCards helps global shoppers buy trusted digital gift cards online with fast payment confirmation, clear order tracking, and email delivery.",
+      "KarryCards helps shoppers buy digital gift cards online with secure checkout, clear order tracking, and email delivery.",
     url: "/about-us",
     siteName: "KarryCards",
     type: "website"
@@ -46,7 +46,7 @@ export default function AboutUsPage() {
             <h1>Digital gift cards made simple since 2013.</h1>
             <p>
               KarryCards came to existence in 2013 with one clear idea: make trusted gift cards easier to buy, send,
-              and use. We serve customers in the USA and around the world with digital cards for gaming, retail,
+              and use. We focus on customers in the USA with digital cards for gaming, retail,
               streaming, food delivery, travel, beauty, prepaid spending, and everyday gifting.
             </p>
             <div className="hero-actions">
@@ -68,7 +68,7 @@ export default function AboutUsPage() {
             <h2>Who We Are</h2>
             <p>
               A digital gift card store for people who want quick, clear, and reliable online gifting, whether they are
-              shopping from New York, London, Nairobi, Toronto, Lagos, Dubai, or beyond.
+              shopping from New York, Los Angeles, Houston, Atlanta, Chicago, Miami, Dallas, or beyond.
             </p>
           </article>
 

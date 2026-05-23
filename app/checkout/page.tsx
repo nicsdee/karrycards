@@ -292,7 +292,7 @@ export default function CheckoutPage() {
             </div>
             <div className="summary-trust">
               <ShieldCheck size={19} />
-              <span>Payment confirmation protects your order before supplier delivery.</span>
+              <span>Payment confirmation protects your order before email delivery.</span>
             </div>
           </aside>
         </section>

@@ -97,7 +97,7 @@ export async function submitPesapalOrder(input: {
   };
 }) {
   const token = await getPesapalToken();
-  const appUrl = process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || "https://karrycards.vercel.app";
+  const appUrl = process.env.APP_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://www.karrycards.com";
   const notificationId = process.env.PESAPAL_IPN_ID;
 
   if (!notificationId) {

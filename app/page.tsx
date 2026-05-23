@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import HomeClient from "./HomeClient";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.karrycards.com";
+
 export const metadata: Metadata = {
   title: "Buy Digital Gift Cards Online in the USA",
   description:
-    "Shop digital gift cards for gaming, streaming, retail, food delivery, beauty, travel, and everyday gifting. KarryCards offers secure checkout, clear order tracking, and email delivery.",
+    "Buy digital gift cards online in the USA for gaming, retail, streaming, food delivery, coffee, beauty, and travel. Secure crypto checkout, order tracking, and email delivery.",
   keywords: [
     "buy gift cards online USA",
     "digital gift cards",
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Buy Digital Gift Cards Online in the USA | KarryCards",
     description:
-      "Find popular digital gift cards across gaming, retail, streaming, food delivery, travel, and beauty with secure checkout and order tracking.",
+      "Find popular digital gift cards across gaming, retail, streaming, food delivery, coffee, travel, and beauty with secure checkout and order tracking.",
     url: "/",
     siteName: "KarryCards",
     images: [
@@ -51,13 +53,13 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: "Buy Digital Gift Cards Online in the USA",
-    url: "https://karrycards.vercel.app/",
+    url: `${siteUrl}/`,
     description:
-      "Shop digital gift cards for gaming, retail, streaming, food delivery, travel, beauty, and everyday gifting.",
+      "Shop digital gift cards for gaming, retail, streaming, food delivery, coffee, travel, beauty, and everyday gifting.",
     isPartOf: {
       "@type": "WebSite",
       name: "KarryCards",
-      url: "https://karrycards.vercel.app/"
+      url: `${siteUrl}/`
     },
     mainEntity: {
       "@type": "ItemList",

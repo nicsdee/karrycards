@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { categories, giftCards } from "./data";
 
-const siteUrl = "https://karrycards.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.karrycards.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/about-us", "/our-digital-gift-cards", "/checkout", "/order-status", "/terms", "/privacy", "/refunds"];

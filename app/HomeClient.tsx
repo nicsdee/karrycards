@@ -148,6 +148,7 @@ export default function HomeClient() {
   const [cartLoaded, setCartLoaded] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [heroOffset, setHeroOffset] = useState(0);
+  const [isMobileHero, setIsMobileHero] = useState(false);
 
   useEffect(() => {
     fetchCatalog()
@@ -185,14 +186,29 @@ export default function HomeClient() {
   const popularCards = useMemo(() => catalog.giftCards.filter((card) => card.popular).slice(0, 8), [catalog.giftCards]);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 760px)");
+    const updateMobileHero = () => setIsMobileHero(mediaQuery.matches);
+
+    updateMobileHero();
+    mediaQuery.addEventListener("change", updateMobileHero);
+
+    return () => mediaQuery.removeEventListener("change", updateMobileHero);
+  }, []);
+
+  useEffect(() => {
     if (!catalog.giftCards.length) return;
+
+    if (!isMobileHero) {
+      setHeroOffset(0);
+      return;
+    }
 
     const interval = window.setInterval(() => {
       setHeroOffset((current) => (current + 1) % catalog.giftCards.length);
-    }, 1600);
+    }, 1400);
 
     return () => window.clearInterval(interval);
-  }, [catalog.giftCards.length]);
+  }, [catalog.giftCards.length, isMobileHero]);
 
   const heroCards = useMemo(() => {
     const cards = catalog.giftCards;
@@ -372,6 +388,24 @@ export default function HomeClient() {
               </article>
             );
           })}
+        </section>
+
+        <section className="home-seo-panel" aria-labelledby="home-seo-title">
+          <div>
+            <p className="home-kicker">
+              <ShieldCheck size={16} />
+              Built for US gift card shoppers
+            </p>
+            <h2 id="home-seo-title">KarryCards is a digital gift card store for fast, clear online gifting.</h2>
+          </div>
+          <p>
+            We help shoppers find popular digital gift cards for gaming, retail, streaming, food delivery, coffee, beauty, and travel.
+            Every order shows USD pricing, checkout totals, delivery expectations, and order tracking before payment.
+          </p>
+          <p>
+            KarryCards is designed for customers who want a simple online gift card buying experience with secure crypto checkout,
+            email delivery after payment confirmation, and clear support pages for privacy, refunds, and terms.
+          </p>
         </section>
 
         <section className="home-section-shell">

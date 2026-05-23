@@ -4,14 +4,16 @@ import TawkToChat from "./components/TawkToChat";
 import VisitorTracker from "./components/VisitorTracker";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.karrycards.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://karrycards.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "KarryCards | Trusted Digital Gift Cards",
+    default: "KarryCards | Digital Gift Cards for US Shoppers",
     template: "%s | KarryCards"
   },
   description:
-    "Buy trusted digital gift cards online with secure checkout, instant payment confirmation, email delivery, and order tracking for customers worldwide.",
+    "Buy digital gift cards online in the USA for gaming, retail, streaming, food delivery, coffee, beauty, and travel with secure checkout and email delivery.",
   keywords: [
     "buy gift cards online",
     "digital gift cards online",
@@ -35,9 +37,9 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   openGraph: {
-    title: "KarryCards | Trusted Digital Gift Cards",
+    title: "KarryCards | Digital Gift Cards for US Shoppers",
     description:
-      "Buy trusted digital gift cards online with secure checkout, fast payment confirmation, and email delivery.",
+      "Buy digital gift cards online for gaming, retail, streaming, food delivery, coffee, beauty, and travel with secure checkout and email delivery.",
     url: "/",
     siteName: "KarryCards",
     images: [
@@ -56,8 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KarryCards | Discount Digital Gift Cards",
-    description: "Buy trusted digital gift cards online with secure checkout and email delivery."
+    title: "KarryCards | Digital Gift Cards for US Shoppers",
+    description: "Buy digital gift cards online with secure checkout, order tracking, and email delivery."
   }
 };
 
@@ -70,11 +72,11 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Store",
     name: "KarryCards",
-    url: "https://karrycards.vercel.app",
-    logo: "https://karrycards.vercel.app/logos/logo4.svg",
+    url: siteUrl,
+    logo: `${siteUrl}/logos/logo4.svg`,
     foundingDate: "2013",
-    description: "Digital gift card store serving online shoppers worldwide since 2013.",
-    areaServed: ["US", "CA", "GB", "EU", "AU", "NG", "KE", "ZA", "AE", "Worldwide"],
+    description: "Digital gift card store serving online shoppers in the United States.",
+    areaServed: ["US"],
     paymentAccepted: "Cryptocurrency",
     priceRange: "$$",
     sameAs: [],
@@ -95,7 +97,7 @@ export default function RootLayout({
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://karrycards.vercel.app/our-digital-gift-cards?search={search_term_string}",
+      target: `${siteUrl}/our-digital-gift-cards?search={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };

@@ -71,7 +71,7 @@ export async function createNowPaymentsInvoice(input: {
   amount: number;
   description: string;
 }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://karrycards.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.karrycards.com";
   return nowPaymentsFetch<NowPaymentsInvoice>("/invoice", {
     method: "POST",
     body: JSON.stringify({
