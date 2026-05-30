@@ -7,7 +7,7 @@ import { fallbackCatalog } from "../lib/catalog";
 export const metadata: Metadata = {
   title: "About Us | Digital Gift Cards for US Shoppers",
   description:
-    "Learn about KarryCards, a digital gift card store for US shoppers with secure checkout, clear order tracking, and email delivery after payment confirmation.",
+    "Learn about KarryCards, a digital gift card store for US shoppers with secure checkout, clear order tracking, and automatic email delivery after blockchain confirmation.",
   keywords: [
     "about KarryCards",
     "trusted gift card store",

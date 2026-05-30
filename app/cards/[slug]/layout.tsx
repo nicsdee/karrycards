@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Omit<CardLayoutProps, "childr
 
   const salePrice = discountedPriceForCard(card);
   const title = `${card.productName} Online`;
-  const description = `Buy a ${card.productName} online from KarryCards. ${card.category} gift card, USD pricing from ${money(salePrice)}, secure checkout, order tracking, and email delivery after payment confirmation.`;
+  const description = `Buy a ${card.productName} online from KarryCards. ${card.category} gift card, USD pricing from ${money(salePrice)}, secure checkout, order tracking, and automatic email delivery after blockchain confirmation.`;
 
   return {
     title,

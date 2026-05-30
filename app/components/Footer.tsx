@@ -40,7 +40,7 @@ export default function Footer() {
           <Link className="retail-brand footer-logo-link" href="/" aria-label="KarryCards home">
             <Image className="footer-logo" src="/logos/logo5.svg" alt="KarryCards" width={520} height={70} />
           </Link>
-          <p className="footer-lead">Trusted digital gift cards with crypto checkout, fast manual fulfillment, and order tracking.</p>
+          <p className="footer-lead">Trusted digital gift cards with secure checkout, clear delivery updates, and order tracking.</p>
         </div>
 
         <div className="footer-column">
@@ -55,6 +55,7 @@ export default function Footer() {
         <div className="footer-column">
           <h2>Support</h2>
           <Link href="/about-us">About us</Link>
+          <Link href="/faq">FAQ</Link>
           <Link href="/checkout">Order checkout</Link>
           <Link href="/order-status">Order status</Link>
           <Link href="/terms">Terms & conditions</Link>
@@ -65,7 +66,7 @@ export default function Footer() {
 
         <div className="footer-column footer-newsletter">
           <h2>Payments & alerts</h2>
-          <p>Customers pay through secure crypto checkout. After confirmation, paid orders enter the fulfillment desk for quick code delivery.</p>
+          <p>Customers pay through secure crypto checkout. After blockchain confirmation, gift card codes are emailed automatically with order tracking.</p>
           <div className="newsletter-form">
             <input
               type="email"
@@ -120,6 +121,7 @@ export default function Footer() {
           <Link href="/terms">Terms</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/refunds">Refunds</Link>
+          <Link href="/faq">FAQ</Link>
         </div>
       </div>
     </footer>

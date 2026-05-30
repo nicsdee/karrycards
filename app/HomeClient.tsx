@@ -9,6 +9,7 @@ import {
   CreditCard,
   Gift,
   LockKeyhole,
+  Mail,
   Search,
   ShieldCheck,
   ShoppingBag,
@@ -26,6 +27,7 @@ import Footer from "./components/Footer";
 import Nav from "./components/nav";
 import { GiftCard } from "./data";
 import { fallbackCatalog, fetchCatalog } from "./lib/catalog";
+import { whatsappDisplay, whatsappHref } from "./lib/contact";
 import { discountedPriceForCard, discountPercentForCard } from "./lib/pricing";
 
 type CartItem = GiftCard & {
@@ -42,7 +44,7 @@ const featureCards = [
   {
     icon: Clock3,
     title: "Fast digital delivery",
-    copy: "Paid orders move into fulfillment for delivery to the customer's email."
+    copy: "After blockchain confirmation, the gift card code is emailed automatically to the customer."
   },
   {
     icon: LockKeyhole,
@@ -58,6 +60,74 @@ const shoppingMoments = [
   "Employee appreciation",
   "Streaming night",
   "Food delivery"
+];
+
+const trustReasons = [
+  {
+    icon: Clock3,
+    title: "Delivery expectations up front",
+    copy: "Automated email delivery starts as soon as the payment is confirmed on the blockchain."
+  },
+  {
+    icon: ShieldCheck,
+    title: "Policies before payment",
+    copy: "Refund, privacy, terms, and order-status links are visible before checkout so shoppers know what to expect."
+  },
+  {
+    icon: Truck,
+    title: "Tracked delivery",
+    copy: "Paid orders are recorded with customer email, payment status, and delivery status for support follow-up."
+  },
+  {
+    icon: LockKeyhole,
+    title: "Focused checkout",
+    copy: "Customers only enter the details needed for order delivery, support, and confirmation."
+  }
+];
+
+const customerReviews = [
+  {
+    name: "Michael Harris",
+    location: "Texas, USA",
+    initials: "MH",
+    gender: "man",
+    quote: "I received my Steam gift card by email right after the payment was confirmed."
+  },
+  {
+    name: "Sarah Mitchell",
+    location: "Florida, USA",
+    initials: "SM",
+    gender: "woman",
+    quote: "Checkout was simple, and the order status made the delivery process clear."
+  },
+  {
+    name: "Daniel Brooks",
+    location: "California, USA",
+    initials: "DB",
+    gender: "man",
+    quote: "Search helped me find Roblox, PlayStation, and Razer Gold cards quickly."
+  },
+  {
+    name: "Emily Carter",
+    location: "Georgia, USA",
+    initials: "EC",
+    gender: "woman",
+    quote: "Seeing WhatsApp support and clear policies made the website feel safer before I paid."
+  }
+];
+
+const deliverySteps = [
+  "Customer chooses a card and enters the delivery email.",
+  "Payment opens through secure crypto checkout.",
+  "After blockchain confirmation, the automated delivery system prepares the code.",
+  "The gift card code is emailed to the customer and copied to the order desk."
+];
+
+const proofItems = [
+  "Payment status",
+  "Delivery email",
+  "Order timeline",
+  "Support notes"
 ];
 
 function money(amount: number) {
@@ -107,7 +177,7 @@ function ProductCard({
             <span>{card.rating.toFixed(1)}</span>
             <small>({card.reviews.toLocaleString()} reviews)</small>
           </div>
-          <p className="delivery">Email delivery after payment confirmation</p>
+          <p className="delivery">Automated email delivery after blockchain confirmation</p>
           <div className="price-line">
             <strong>{money(salePrice)}</strong>
             <span>USD</span>
@@ -149,6 +219,8 @@ export default function HomeClient() {
   const [toastMessage, setToastMessage] = useState("");
   const [heroOffset, setHeroOffset] = useState(0);
   const [isMobileHero, setIsMobileHero] = useState(false);
+  const supportHref = whatsappHref("Hi KarryCards, I need help with a digital gift card order.");
+  const supportLabel = `WhatsApp ${whatsappDisplay}`;
 
   useEffect(() => {
     fetchCatalog()
@@ -302,7 +374,7 @@ export default function HomeClient() {
             <h1 id="home-hero-title">Buy digital gift cards online with confidence.</h1>
             <p>
               Shop popular gift cards for gaming, retail, streaming, food delivery, beauty, and travel. KarryCards keeps the
-              experience clear with secure checkout, order tracking, and email delivery after payment confirmation.
+              experience clear with secure checkout, order tracking, and automatic email delivery after blockchain confirmation.
             </p>
             <div className="hero-search-panel" role="search">
               <Search size={20} />
@@ -404,8 +476,119 @@ export default function HomeClient() {
           </p>
           <p>
             KarryCards is designed for customers who want a simple online gift card buying experience with secure crypto checkout,
-            email delivery after payment confirmation, and clear support pages for privacy, refunds, and terms.
+            automatic email delivery after blockchain confirmation, and clear support pages for privacy, refunds, and terms.
           </p>
+        </section>
+
+        <section className="conversion-trust-zone" aria-labelledby="conversion-trust-title">
+          <div className="section-heading-row ads-trust-heading">
+            <div>
+              <p className="home-kicker">
+                <BadgeCheck size={16} />
+                Ready for search ads
+              </p>
+              <h2 id="conversion-trust-title">Trust signals built for gift card buyers.</h2>
+              <p>
+                Gift card shoppers want proof, support, and clear delivery details before they pay. KarryCards keeps those
+                details visible across the homepage, FAQ, checkout, order status, and support flow.
+              </p>
+            </div>
+            <Link href="/faq">
+              Read FAQ
+              <ArrowRight size={17} />
+            </Link>
+          </div>
+
+          <h3 className="trust-subheading">Why choose KarryCards?</h3>
+          <div className="why-karrycards-grid">
+            {trustReasons.map((reason) => {
+              const Icon = reason.icon;
+              return (
+                <article key={reason.title}>
+                  <Icon size={22} />
+                  <h3>{reason.title}</h3>
+                  <p>{reason.copy}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="trust-proof-grid">
+            <article className="delivery-estimate-panel">
+              <div className="trust-panel-title">
+                <Clock3 size={18} />
+                <span>Automatic delivery</span>
+              </div>
+              <strong>Codes are emailed automatically after blockchain confirmation.</strong>
+              <p>
+                If the blockchain network takes longer to confirm payment, delivery waits until confirmation is received.
+              </p>
+              <ol>
+                {deliverySteps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            </article>
+
+            <article className="support-proof-panel">
+              <div className="trust-panel-title">
+                <Mail size={18} />
+                <span>Support and proof</span>
+              </div>
+              <p>
+                Customers can contact KarryCards through live chat, WhatsApp {whatsappDisplay}, or email with an order
+                reference if delivery needs review.
+              </p>
+              <div className="proof-chip-grid">
+                {proofItems.map((item) => (
+                  <span key={item}>
+                    <BadgeCheck size={15} />
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <a className="trust-support-link" href={supportHref} target="_blank" rel="noreferrer">
+                <Mail size={17} />
+                {supportLabel}
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section className="customer-reviews-section" aria-labelledby="customer-reviews-title">
+          <div className="section-heading-row customer-reviews-heading">
+            <div>
+              <p className="home-kicker">
+                <Star size={16} fill="currentColor" />
+                Customer reviews
+              </p>
+              <h2 id="customer-reviews-title">Shoppers trust a clear gift card checkout.</h2>
+              <p>
+                Real buyers want fast search, clear payment instructions, automatic delivery, and support they can reach.
+              </p>
+            </div>
+          </div>
+          <div className="customer-review-grid">
+            {customerReviews.map((review) => (
+              <figure className="customer-review-card" key={`${review.name}-${review.location}`}>
+                <div className="review-card-top">
+                  <span className={`review-avatar avatar-${review.gender}`} aria-hidden="true">
+                    {review.initials}
+                  </span>
+                  <figcaption>
+                    <strong>{review.name}</strong>
+                    <span>{review.location}</span>
+                  </figcaption>
+                </div>
+                <div className="review-stars" aria-label="5 star review">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <Star key={index} size={15} fill="currentColor" />
+                  ))}
+                </div>
+                <blockquote>{review.quote}</blockquote>
+              </figure>
+            ))}
+          </div>
         </section>
 
         <section className="home-section-shell">

@@ -231,7 +231,7 @@ export default function CheckoutPage() {
 
               <div className="crypto-box crypto-payment-box">
                 <strong><WalletCards size={18} /> Crypto checkout</strong>
-                <p>Your gift card code is sent to your email after blockchain confirmation and fulfillment.</p>
+                <p>Your gift card code is sent to your email automatically after blockchain confirmation.</p>
                 <div className="checkout-coin-row" aria-label="Popular supported coins">
                   {cryptoIcons.map((coin) => (
                     <span className="checkout-coin" key={coin.code} title={coin.name}>

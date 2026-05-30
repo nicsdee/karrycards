@@ -71,7 +71,7 @@ export async function POST(request: Request) {
       productName: item.productName,
       amount: item.amount,
       status: "pending",
-      message: "Payment is pending. Fulfillment starts after crypto payment confirmation."
+      message: "Payment is pending. Automatic email delivery starts after blockchain confirmation."
     }));
 
     const order = await createOrder({
@@ -118,7 +118,7 @@ export async function POST(request: Request) {
         supplierCost: subtotal,
         profit: serviceFee,
         currency: "USD",
-        instructions: "Choose any supported crypto coin/network. Your gift card code is sent to your email after payment confirmation."
+        instructions: "Choose any supported crypto coin/network. Your gift card code is sent to your email automatically after blockchain confirmation."
       }
     });
   } catch (error) {
